@@ -1,255 +1,166 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Clown博客</title>
-    <link>https://liuwb.top/posts/</link>
-    <description>Recent content in Posts on Clown博客</description>
+    <title>Posts on Clown的博客</title>
+    <link>https://example.com/posts/</link>
+    <description>Recent content in Posts on Clown的博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh</language>
+    <language>en-us</language>
     <lastBuildDate>Fri, 12 Jun 2020 20:57:58 +0800</lastBuildDate>
     
-	<atom:link href="https://liuwb.top/posts/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://example.com/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>sync 修饰符</title>
-      <link>https://liuwb.top/posts/sync-%E4%BF%AE%E9%A5%B0%E7%AC%A6/</link>
+      <link>https://example.com/posts/sync-%E4%BF%AE%E9%A5%B0%E7%AC%A6/</link>
       <pubDate>Fri, 12 Jun 2020 20:57:58 +0800</pubDate>
       
-      <guid>https://liuwb.top/posts/sync-%E4%BF%AE%E9%A5%B0%E7%AC%A6/</guid>
-      <description>App.vue
-&amp;lt;template&amp;gt; &amp;lt;div class=&amp;quot;app&amp;quot;&amp;gt; App.vue 我现在有 {{total}} &amp;lt;hr&amp;gt; &amp;lt;Child :money=&amp;quot;total&amp;quot; v-on:update:money=&amp;quot;total = $event&amp;quot;/&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;/template&amp;gt; &amp;lt;script&amp;gt; import Child from &amp;quot;./Child.vue&amp;quot;; export default { data() { return { total: 10000 }; }, components: { Child: Child } }; &amp;lt;/script&amp;gt; &amp;lt;style&amp;gt; .app { border: 3px solid red; padding: 10px; } &amp;lt;/style&amp;gt;  Child.vue
-&amp;lt;template&amp;gt; &amp;lt;div class=&amp;quot;child&amp;quot;&amp;gt; {{money}} &amp;lt;button @click=&amp;quot;$emit(&#39;update:money&#39;, money-100)&amp;quot;&amp;gt; &amp;lt;span&amp;gt;花钱&amp;lt;/span&amp;gt; &amp;lt;/button&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;/template&amp;gt; &amp;lt;script&amp;gt; export default { props: [&amp;quot;money&amp;quot;] }; &amp;lt;/script&amp;gt; &amp;lt;style&amp;gt; .</description>
+      <guid>https://example.com/posts/sync-%E4%BF%AE%E9%A5%B0%E7%AC%A6/</guid>
+      <description>App.vue &amp;lt;template&amp;gt; &amp;lt;div class=&amp;quot;app&amp;quot;&amp;gt; App.vue 我现在有 {{total}} &amp;lt;hr&amp;gt; &amp;lt;Child :money=&amp;quot;total&amp;quot; v-on:update:money=&amp;quot;total = $event&amp;quot;/&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;/template&amp;gt; &amp;lt;script&amp;gt; import Child from &amp;quot;./Child.vue&amp;quot;; export default { data() { return { total: 10000 }; }, components: { Child: Child } }; &amp;lt;/script&amp;gt; &amp;lt;style&amp;gt; .app { border: 3px solid red; padding: 10px; } &amp;lt;/style&amp;gt; Child.vue &amp;lt;template&amp;gt; &amp;lt;div class=&amp;quot;child&amp;quot;&amp;gt; {{money}} &amp;lt;button @click=&amp;quot;$emit(&#39;update:money&#39;, money-100)&amp;quot;&amp;gt; &amp;lt;span&amp;g</description>
     </item>
     
     <item>
       <title>Vue数据响应式</title>
-      <link>https://liuwb.top/posts/vue%E6%95%B0%E6%8D%AE%E5%93%8D%E5%BA%94%E5%BC%8F/</link>
+      <link>https://example.com/posts/vue%E6%95%B0%E6%8D%AE%E5%93%8D%E5%BA%94%E5%BC%8F/</link>
       <pubDate>Tue, 09 Jun 2020 20:24:22 +0800</pubDate>
       
-      <guid>https://liuwb.top/posts/vue%E6%95%B0%E6%8D%AE%E5%93%8D%E5%BA%94%E5%BC%8F/</guid>
-      <description>Vue 数据响应式 &amp;ldquo;响应式&amp;rdquo;是指一个物体对外界的刺激做出反应.Vue数据响应式是指,当 data 数据改变时,Vue会通知使用该数据的代码,那么这是为什么呢?我们看下面的例子
-//例一 const myData = { n: 0, }; console.log(myData); // {n:0} let vm = new Vue({ el: &amp;quot;#app&amp;quot;, template: ` &amp;lt;div&amp;gt;{{n}} &amp;lt;button @click=&amp;quot;add&amp;quot;&amp;gt;+1&amp;lt;/button&amp;gt; &amp;lt;/div&amp;gt; `, data: myData, methods: { add() { this.n += 1; console.log(myData); //{n:(...)} }, }, });  我们可以看到,当点击按钮后, myData 发生了改变,这是为什么呢?再看下面这个例子
-//例子二 let obj1 = { 姓: &amp;quot;高&amp;quot;, 名: &amp;quot;圆圆&amp;quot;, 姓名() { return this.姓 + this.名; }, }; console.log(obj1.姓名()); //高圆圆 let obj2 = { 姓: &amp;quot;高&amp;quot;, 名: &amp;quot;圆圆&amp;quot;, get 姓名() { return this.</description>
+      <guid>https://example.com/posts/vue%E6%95%B0%E6%8D%AE%E5%93%8D%E5%BA%94%E5%BC%8F/</guid>
+      <description>Vue 数据响应式 &amp;ldquo;响应式&amp;rdquo;是指一个物体对外界的刺激做出反应.Vue数据响应式是指,当 data 数据改变时,Vue会通知使用该数据</description>
     </item>
     
     <item>
       <title>Vue的初识</title>
-      <link>https://liuwb.top/posts/vue%E7%9A%84%E5%88%9D%E8%AF%86/</link>
+      <link>https://example.com/posts/vue%E7%9A%84%E5%88%9D%E8%AF%86/</link>
       <pubDate>Mon, 08 Jun 2020 19:02:11 +0800</pubDate>
       
-      <guid>https://liuwb.top/posts/vue%E7%9A%84%E5%88%9D%E8%AF%86/</guid>
-      <description>Vue Vue 的作者是尤雨溪,英文名为 Evan You.Vue 是一套用于构建用户见面的渐进式框架,主要关注的是 V(视图层),M(数据模型)和 C(控制器)则被简化.
-Vue 项目的搭建 使用 @vue/cli  搜索@vue/cil,进入官网 打开文档,打开 创建一个项目 章节 全局安装,在终端运行命令行 yarn global add @vue/cli 选择使用的配置 在终端运行命令 vue create 文件夹名 即可创建一个 Vue 项目  CodeSandbox 网站  在浏览器地址栏输入codesandbox.io 选择 vue 项目,即可创建项目 可以根据自己的需求在网站上进行项目制作 可以选择 File -&amp;gt; Export to ZIP 将文件下载至本地 解压文件压缩包,用 VScode 或 WebStorm 打开即可  自己搭建  使用 webpack 或者 rollup 进行搭建 这里不做详细介绍,可参考 https://www.jianshu.com/p/f502380062d1 该方式不适合新手,适合使用Vue半年以上的老手  使用 Vue 实例 从 HTML 得到视图 使用完整版的Vue</description>
+      <guid>https://example.com/posts/vue%E7%9A%84%E5%88%9D%E8%AF%86/</guid>
+      <description>Vue Vue 的作者是尤雨溪,英文名为 Evan You.Vue 是一套用于构建用户见面的渐进式框架,主要关注的是 V(视图层),M(数据模型)和 C(控制器)则被简化. Vue 项目的</description>
     </item>
     
     <item>
       <title>浅析 MVC</title>
-      <link>https://liuwb.top/posts/%E6%B5%85%E6%9E%90-mvc/</link>
+      <link>https://example.com/posts/%E6%B5%85%E6%9E%90-mvc/</link>
       <pubDate>Thu, 04 Jun 2020 21:32:02 +0800</pubDate>
       
-      <guid>https://liuwb.top/posts/%E6%B5%85%E6%9E%90-mvc/</guid>
-      <description>MVC MVC 全名是Model View Controller是一种架构设计模式,将数据,界面的显示分离开来,当用户更新页面时,不需要重新编写全部代码.相当于把适用于一些任务的&amp;rdquo;工具&amp;rdquo;放在一起,当遇到类似的任务时,就可以用这个&amp;rdquo;工具包&amp;rdquo;,不用再去一个个的寻找,也可以说 MVC 是万金油,适用于大部分情况.
-MVC每个模块可以分为三个对象:
- M - Model (数据模型) 负责操作所有数据
-const m = { data: { n: parseInt(localStorage.getItem(&#39;n&#39;)) }, update(data){ Object.assign(m.data,data) eventBar.trigger(&#39;m-updated&#39;) } }  V - View (视图) 负责所有 UI 界面
-const c = { init(container) { v.init(container) v.render(m.data.n) c.bindEvent() eventBar.on(&#39;m-updated&#39;,()=&amp;gt;{ v.render(m.data.n) }) }, event: { &amp;quot;click #add&amp;quot;: &amp;quot;add&amp;quot;, &amp;quot;click #sub&amp;quot;: &amp;quot;sub&amp;quot;, &amp;quot;click #mul&amp;quot;: &amp;quot;mul&amp;quot;, &amp;quot;click #div&amp;quot;: &amp;quot;div&amp;quot; }, add() { m.update(m.data.n += 1) }, sub() { m.</description>
+      <guid>https://example.com/posts/%E6%B5%85%E6%9E%90-mvc/</guid>
+      <description>MVC MVC 全名是Model View Controller是一种架构设计模式,将数据,界面的显示分离开来,当用户更新页面时,不需要重新编写全部代码.相当于把</description>
     </item>
     
     <item>
       <title>DOM事件机制和事件委托</title>
-      <link>https://liuwb.top/posts/dom%E4%BA%8B%E4%BB%B6%E5%92%8C%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98/</link>
+      <link>https://example.com/posts/dom%E4%BA%8B%E4%BB%B6%E5%92%8C%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98/</link>
       <pubDate>Tue, 26 May 2020 19:34:38 +0800</pubDate>
       
-      <guid>https://liuwb.top/posts/dom%E4%BA%8B%E4%BB%B6%E5%92%8C%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98/</guid>
-      <description>DOM 事件机制 有三个 DIV 元素, #grandfather 包含 #father 包含 #child,并给三个 DIV 绑定一个点击事件,输出一段文字,当我们点击最内层的文字,谁的文字会最先打出来呢?
-&amp;lt;div id=&amp;quot;grandfather&amp;quot;&amp;gt; &amp;lt;div id=&amp;quot;father&amp;quot;&amp;gt; &amp;lt;div id=&amp;quot;child&amp;quot;&amp;gt;请点击我&amp;lt;/div&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;script&amp;gt; let grandfather = document.querySelector(&#39;#grandfather&#39;); let father = document.querySelector(&#39;#father&#39;); let child = document.querySelector(&#39;#child&#39;); grandfather.onclick=()=&amp;gt;{ console.log(&#39;grandfather 被点击&#39;) } father.onclick=()=&amp;gt;{ console.log(&#39;father 被点击&#39;) } child.onclick=()=&amp;gt;{ console.log(&#39;child 被点击&#39;) } &amp;lt;/script&amp;gt;  IE5认为先执行 #child 中的函数的这种 从内岛外 的顺序,叫做事件冒泡
-网景认为先执行 #grandfather 中的函数的这种 从外到内 的顺序,叫做事件捕获
-于是 W3C发布标准: 首先 按照 从外到内 的顺序找监听函数,然后 按照 从内到外 的顺序找监听函数,如果找到监听函数就调用,并提供事件信息,没有就跳过
-// 事件绑定 API IE5: child.</description>
+      <guid>https://example.com/posts/dom%E4%BA%8B%E4%BB%B6%E5%92%8C%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98/</guid>
+      <description>DOM 事件机制 有三个 DIV 元素, #grandfather 包含 #father 包含 #child,并给三个 DIV 绑定一个点击事件,输出一段文字,当我们点击最内层的文字,谁的文字会最先打出来呢?</description>
     </item>
     
     <item>
       <title>浅析jQuery的设计思想</title>
-      <link>https://liuwb.top/posts/%E6%B5%85%E6%9E%90jquery%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3/</link>
+      <link>https://example.com/posts/%E6%B5%85%E6%9E%90jquery%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3/</link>
       <pubDate>Mon, 25 May 2020 22:05:17 +0800</pubDate>
       
-      <guid>https://liuwb.top/posts/%E6%B5%85%E6%9E%90jquery%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3/</guid>
-      <description>目录  什么是 jQuery jQuery 的实现 获取元素 链式操作 创建元素 移动元素 删改元素  什么是 jQuery jQuery 是目前最长寿,也是目前世界使用最广泛的 javaScript 函数库,虽然jQuery现在已经过时,但很多大型的网站都还在使用着它.
-jQuery 的实现 前面说了 jQuery 是 javaScript 函数库,那么 jQuery 是怎么由 javaScript 构建出来的呢?
-封装 简单的来说,封装 就是把一些零散的代码组成一个组件.就像是电脑主机,CPU,内存条,硬盘,主板,显卡等零散的零件,用机箱将他们封装在一起,用户使用的时候,并不用知道里面是怎样摆放,是怎样运作的.
-接口 被封装的东西,需要暴露一些功能给外部,让用户可以通过这些功能与被封装的东西进行交互与通讯,这些功能我们就叫做接口.类似于电脑主机中的 USB 接口,耳机孔,电源插口等等.
-所以,jQuery 是由 javaScript 中许许多多的函数,语句等封装起来的一个库,而 jQuery 文档中提供的用法,我们称之为 API .
-接下来,我们来看看 jQuery 如何使用
-获取元素 我们要修改哪个元素,就在哪个元素上对其使用 jQuery,因此,我们必须先找到这个元素.
-$(document); //可以获取整个文档 $(&amp;quot;#test&amp;quot;); //可以获取 ID 为 test 的元素 $(&amp;quot;.red&amp;quot;); //可以获取整个页面 class 为 red 的元素 $(&amp;quot;div.red&amp;quot;); //可以获取 class 为 red 的div元素 $(&amp;quot;#test&amp;quot;).</description>
+      <guid>https://example.com/posts/%E6%B5%85%E6%9E%90jquery%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3/</guid>
+      <description>目录 什么是 jQuery jQuery 的实现 获取元素 链式操作 创建元素 移动元素 删改元素 什么是 jQuery jQuery 是目前最长寿,也是目前世界使用最广泛的 javaScript 函数库,虽然jQuery现在已</description>
     </item>
     
     <item>
       <title>JS 函数的执行时机</title>
-      <link>https://liuwb.top/posts/js%E5%87%BD%E6%95%B0%E7%9A%84%E6%89%A7%E8%A1%8C%E6%97%B6%E6%9C%BA/</link>
+      <link>https://example.com/posts/js%E5%87%BD%E6%95%B0%E7%9A%84%E6%89%A7%E8%A1%8C%E6%97%B6%E6%9C%BA/</link>
       <pubDate>Wed, 20 May 2020 20:43:32 +0800</pubDate>
       
-      <guid>https://liuwb.top/posts/js%E5%87%BD%E6%95%B0%E7%9A%84%E6%89%A7%E8%A1%8C%E6%97%B6%E6%9C%BA/</guid>
-      <description>执行时机 时机不同,得到的结果也是不同的,看下面的例子:
-// 例 1 let a = 1 function fn(){ console.log(a) } a = 2 fn() // 2  // 例 2 let a = 1 function fn(){ console.log(a) } fn() // 1 a = 2  例 1和例 2,代码其实都差不多,不同的只是 fn 的调用时机不同,例 1在代码a=2之后调用fn,a这个时候已经被重新赋值了,所以得出的结果为2;例 2调用fn,结果直接输出为1,后面a=2,对其完全没有影响
-现在我们知道了时机对函数的影响,我们继续来看下面这个例子:
-// 例 3 let i = 0 for(i = 0; i&amp;lt;6; i++){ setTimeout(()=&amp;gt;{ console.log(i) },0) }  你以为输出的结果会是 0,1,2,3,4,5 ?仿佛并不是这样,结果是 6,6,6,6,6,6,这是为什么呢?
-这里我们就要说一下 setTimeout ,这个API是指定一个定时器,该定时器在到时候执行里面的函数或代码</description>
+      <guid>https://example.com/posts/js%E5%87%BD%E6%95%B0%E7%9A%84%E6%89%A7%E8%A1%8C%E6%97%B6%E6%9C%BA/</guid>
+      <description>执行时机 时机不同,得到的结果也是不同的,看下面的例子: // 例 1 let a = 1 function fn(){ console.log(a) } a = 2 fn() // 2 // 例 2 let a = 1 function fn(){ console.log(a) } fn() // 1 a = 2 例 1和例 2,代码其</description>
     </item>
     
     <item>
       <title>JS 对象基本用法</title>
-      <link>https://liuwb.top/posts/js%E5%AF%B9%E8%B1%A1%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/</link>
+      <link>https://example.com/posts/js%E5%AF%B9%E8%B1%A1%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/</link>
       <pubDate>Tue, 19 May 2020 22:51:51 +0800</pubDate>
       
-      <guid>https://liuwb.top/posts/js%E5%AF%B9%E8%B1%A1%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/</guid>
-      <description>对象 object js中唯一一种复杂类型
- 无序的数据集合 键值对的集合  声明方式 let obj = {&#39;name&#39;:&#39;Tom&#39;,&#39;age&#39;:18} let obj = new Object({&#39;name&#39;:&#39;Tom&#39;})  注意:
- 键名是字符串,不是标识符,可以包含任意字符 引号可以省略,省略之后就只能写标识符 就算省略了引号,键名还是字符串  属性名 所有的属性名会自动变成字符串
-Object.keys(obj) //可以得到 obj 的所有的 key  变量做属性名 let p1 = &#39;name&#39; let obj = { [p1]: &#39;Tom&#39; }  这样写的话, obj 的属性名为 &#39;name&#39;
-细节:
- 不加 [] 的属性名会自动变为字符串 加了 [] 的属性名会被当做变量求值  隐藏属性 JS中每一个对象都有一个隐藏属性proto,这个属性存储着其共有属性组成的对象的地址,这个共有属性组成的对象叫做原型,也就是说,隐藏属性proto中存储着原型的地址
-原型  每个对象都有原型
-原型里存着对象的共有属性,比如obj的原型就是一个对象,obj.proto存着这个对象的地址,这个对象里面有toString / constructor / valueOf 等属性</description>
+      <guid>https://example.com/posts/js%E5%AF%B9%E8%B1%A1%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/</guid>
+      <description>对象 object js中唯一一种复杂类型 无序的数据集合 键值对的集合 声明方式 let obj = {&#39;name&#39;:&#39;Tom&#39;,&#39;age&#39;:18} let obj = new Object({&#39;name&#39;:&#39;Tom&#39;}) 注意: 键名是字符串,不是标识符,可以包含任意字符 引号可以省略</description>
     </item>
     
     <item>
       <title>JS 语法</title>
-      <link>https://liuwb.top/posts/js%E8%AF%AD%E6%B3%95/</link>
+      <link>https://example.com/posts/js%E8%AF%AD%E6%B3%95/</link>
       <pubDate>Mon, 18 May 2020 23:24:47 +0800</pubDate>
       
-      <guid>https://liuwb.top/posts/js%E8%AF%AD%E6%B3%95/</guid>
-      <description>表达式与语句 表达式 表达式是由运算元和运算符(可选)构成，并产生运算结果的语法结构
- 1 + 2的表达式的值是为3 add(1,2)表达式值为函数返回值 console.log表达式返回的值为函数本身  语句 由一个或多个关键字和表达式构成
- var a = 1 是一个语句  二者的区别  表达式一般都有值,语句可能有也可能没有 语句一般会改变环境(声明,赋值) 上面两句话并不是绝对的  标识符 是用来识别具体对象的一个名称
-规则  可以是Unicode字母,$,数字,_和中文 数字不能作为标识符的首个字符  变量名是标识符  var _ = 1 var $ = 2 var ___ = 6  注释 不好的注释  把代码翻译为中文 过时的注释 发泄不满的注释  好的注释  踩坑注释 遇到的问题,解决的方法  if语句 语法 if(表达式){ 语句1 }else{ 语句2 }  在{}中只有一句语句的时候可以省略,但不建议省略
-变态情况  表达式里可以非常变态,如 a = 1 语句1和语句2里可以非常变态,如嵌套 if else 缩进可以非常变态,如下</description>
+      <guid>https://example.com/posts/js%E8%AF%AD%E6%B3%95/</guid>
+      <description>表达式与语句 表达式 表达式是由运算元和运算符(可选)构成，并产生运算结果的语法结构 1 + 2的表达式的值是为3 add(1,2)表达式值为函数返回值</description>
     </item>
     
     <item>
       <title>JavaScript的概述</title>
-      <link>https://liuwb.top/posts/javascript%E6%A6%82%E8%BF%B0/</link>
+      <link>https://example.com/posts/javascript%E6%A6%82%E8%BF%B0/</link>
       <pubDate>Sat, 16 May 2020 22:42:42 +0800</pubDate>
       
-      <guid>https://liuwb.top/posts/javascript%E6%A6%82%E8%BF%B0/</guid>
-      <description> JavaScript的历史 JavaScript的诞生 JavaScript之父,布莱登在1995年进入网景公司,公司要求为其浏览器添加一个脚本功能,而且还必须要蹭Java的热度,于JavaScript功能被开发了出来.由于布莱登只花了十天的时间设计了JS的最初版本,所以当时的JavaScript只是一个不起眼的小功能,而且有很多bug.
-1996年8月,IE3发布,并支持JScript(微软实现的JS),于是网景在三个月后向ECMA提交语言标准,但是由于版权问题,不叫JavaScript,而改为ECMAScript.
-JavaScript的发展  1997年6月,第一版的ECMAScript发布 1999年12月,第三版ECMAScript发布,这个版本是目前世界上使用最广泛的 JS 版本. 2004年4月,谷歌发布Gmail在线网页,让当时认为网页只能看图片和新闻的人们眼前一亮. 2005年,谷歌运用的这种技术被称之为AJAX,前端技术从此正式出现. 2006年,JQuery发布,在未来的十年里,JQuery一直大放异彩,直到IE没落,才没有那么火,但至今依旧有很多网站在使用着他 2009年12月,ECMAScript第五版发布,增加了一些功能.Ryan基于Chrome的JS引擎V8,创建了Node.js 2010年,Isaac基于Node.js写出了npm,前端工程师就可以开始在浏览器之外执行JS,Node.js迅速风靡. 2011年,智能手机的发布和Nokia的没落,前端工程师迎来解放前夕. 2015年6月,ECMAScript第六版发布,新浏览器都支持这个版本,之后每年发布一个版本,并以该年份命名. 2016年,Chrome占据全球份额的62%,超过了IE,同年淘宝天猫宣布不再支持IE6,IE7和IE8,让中国摆脱了IE的支配,前端开始急速发展. 在这期间,JavaScript有很多技术推出,像gulp,grunt,yeoman,reqirejs,webpack,Angular,React,Vue等,虽然至今已有很多没落,但也有很多一直在进步.  JavaScript的缺陷  不适合大型开发 非常小的标准库 null和undefined 全局变量难以控制 自动插入行尾分号 加号运算符 NaN 数组和对象的区分 == 和 === 基本类型的包装对象  </description>
+      <guid>https://example.com/posts/javascript%E6%A6%82%E8%BF%B0/</guid>
+      <description>JavaScript的历史 JavaScript的诞生 JavaScript之父,布莱登在1995年进入网景公司,公司要求为其浏览器添加一个脚本</description>
     </item>
     
     <item>
       <title>浅析 URL</title>
-      <link>https://liuwb.top/posts/%E6%B5%85%E6%9E%90url/</link>
+      <link>https://example.com/posts/%E6%B5%85%E6%9E%90url/</link>
       <pubDate>Fri, 15 May 2020 17:48:49 +0800</pubDate>
       
-      <guid>https://liuwb.top/posts/%E6%B5%85%E6%9E%90url/</guid>
-      <description>URL的组成 URL也叫统一资源定位符,由 协议 + 域名 + 端口号 + 路径 + 查询参数 + 锚点 组成  协议
-HTTP(基于TPC和IP两个协议)协议,还有FTP协议等等。
- 域名
- 域名是对IP的别称 一个域名可以对应不同的IP,这叫均衡负载,防止一台机器扛不住 一个IP可以对应不同的域名,这叫共享主机,资金不够的开发者会这么做.  端口号
-一台机器可以提供很多服务,每个服务的号码就是端口
- HTTP 服务最好使用 80端口 HTTPS 服务最好使用 443端口 FTP 服务最好使用 21端口 一共有65535个端口(基本够用) 0-1023号端口是留给系统使用的,你只有拥有了管理权限,才能使用这1024个端口 其他端口都可以给普通用户使用 端口若被占用,则只能换一个端口  路径
-是服务器上的一个目录或地址,以这个地址访问不同的页面,不是URL必须的部分
- 查询参数
-在问号后面拼接的一串字符,可以查询相关信息,可以在同一个页面,查看不同的内容
- 锚点
-定位页面的位置
- 锚点看起来有中文,实际上不支持中文 锚点无法在Network上看到的,因为锚点不会传给服务器   DNS Domain Name System 域名系统 作用:可以将域名解析为IP,浏览器通过该IP的80/443端口发送请求,访问页面.
-nslookup 可以查询IP地址和DNS记录,查看域名解析是否正常.
-IP 当你买了一个路由器,并连接了租用的宽带,你就有了一个属于自己的IP  路由器没有固定的外网IP,如果你重启了路由器,你有可能会被重新分配一个外网IP 路由器会在你家里创建一个内网,内网中的设备使用内网IP  路由器的功能  内网设备可以相互访问,不能直接访问外网,必须经过路由器中转 外网设备可以相互访问,无法直接访问你的内网,外网设备想把内容发送到内网,必须经过路由器 因此路由器也叫网关  特殊的IP  127.</description>
+      <guid>https://example.com/posts/%E6%B5%85%E6%9E%90url/</guid>
+      <description>URL的组成 URL也叫统一资源定位符,由 协议 + 域名 + 端口号 + 路径 + 查询参数 + 锚点 组成 协议 HTTP(基于TPC和IP两个协议)协议,还有FTP</description>
     </item>
     
     <item>
       <title>CSS 知识总结</title>
-      <link>https://liuwb.top/posts/css-%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/</link>
+      <link>https://example.com/posts/css-%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/</link>
       <pubDate>Thu, 14 May 2020 22:15:34 +0800</pubDate>
       
-      <guid>https://liuwb.top/posts/css-%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/</guid>
-      <description>文档流 盒模型 CSS 布局 CSS 定位 CSS 动画 层叠上下文 浏览器渲染原理 文档流 流动方向  inline
-inline元素从左至右,位置不够时,可能会将元素分为两块宽度由内部的inline元素的和决定不能指定宽度高度由line-height间接决定,与height无关
- block
-宽度默认自动计算,可以用width指定高度由内部文档流元素决定,可以设置height决定
- inline-block
-从左至右,位置不够时,不会将元素分为两块结合两者的特点,可以用width指定宽度,也可以用height设置高度
-  注意:
- 现在不再区分内联元素和块级元素,而是有display决定. 千万不要在 inline元素中加block元素.  overflow 当内容的宽度或者高度大于容器的宽度或高度时,会产生溢出现象.
-可用overflow属性设置:
- visible:默认值,内容不会被改变,显示在容器外部 hidden:内容会被裁剪,适应容器的大小,没有滚动条 scroll:内容会被裁剪,适应容器大小,显示滚动条(无论内容是否超出容器,都会显示滚动条) auto:内容会被裁剪,适应容器大小,显示滚动条(判断内容是否超出容器,超出容器就显示滚动条,否则不显示)  脱离文档流 当元素使用float和position:absolute | fixed属性,都会使元素脱离文档流,脱离文档流后,父元素将不再计算其高度
-盒模型 CSS中有两种盒子模型,一种是W3C标准的盒子模型(content-box),另一种是IE标准的(怪异)盒子模型(border-box).
-标准盒子模型与怪异盒子模型的区别 只有当标准盒子模型与怪异盒子模型同时设置了宽度(width),边框(border)和内边距(padding),才能够用肉眼看到明显的差别
-标准盒子模型 (content-box): 标准盒子模型的 width 和 height 指的是内容 (content) 的宽度和高度,不包括内边距(padding),边框(border)和外边距(margin).
-标准盒子模型的的大小 = width(content) + padding + border + margin
-怪异盒子模型(border-box): 怪异盒子模型的 width 和 height 指的是内容 (content),内边距(padding)和边框(border) ,不包括外边距边距</description>
+      <guid>https://example.com/posts/css-%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/</guid>
+      <description>文档流 盒模型 CSS 布局 CSS 定位 CSS 动画 层叠上下文 浏览器渲染原理 文档流 流动方向 inline inline元素从左至右,位置不够时,可能会将元素分为两块宽度由内部的</description>
     </item>
     
     <item>
       <title>CSS盒模型</title>
-      <link>https://liuwb.top/posts/css%E7%9B%92%E6%A8%A1%E5%9E%8B/</link>
+      <link>https://example.com/posts/css%E7%9B%92%E6%A8%A1%E5%9E%8B/</link>
       <pubDate>Tue, 12 May 2020 22:15:34 +0800</pubDate>
       
-      <guid>https://liuwb.top/posts/css%E7%9B%92%E6%A8%A1%E5%9E%8B/</guid>
-      <description>CSS中有两种盒子模型,一种是W3C标准的盒子模型(content-box),另一种是IE标准的(怪异)盒子模型(border-box).
-标准盒子模型与怪异盒子模型的区别 只有当标准盒子模型与怪异盒子模型同时设置了宽度(width),边框(border)和内边距(padding),才能够用肉眼看到明显的差别
-标准盒子模型 (content-box): 标准盒子模型的 width 和 height 指的是内容 (content) 的宽度和高度,不包括内边距(padding),边框(border)和外边距(margin).
-标准盒子模型的的大小 = width(content) + padding + border + margin
-怪异盒子模型(border-box): 怪异盒子模型的 width 和 height 指的是内容 (content),内边距(padding)和边框(border) ,不包括外边距边距
-怪异盒子模型的的大小 = width(content + padding + border) + margin
-如何使用盒子模型 我们可以通过 box-sizing 来设置使用什么盒子模型.
- content-box: 默认值,即是标准盒子模型.
- border-box: 怪异盒子模型,程序员更多的使用这个,可以更好的设置一个元素的宽高.
-  使用案例 HTML  &amp;lt;div class=&amp;quot;content-box&amp;quot;&amp;gt;&amp;lt;/div&amp;gt; &amp;lt;div class=&amp;quot;border-box&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;  CSS div { width: 200px; height: 100px; border: 5px solid red; padding: 30px; margin: 30px; } .</description>
+      <guid>https://example.com/posts/css%E7%9B%92%E6%A8%A1%E5%9E%8B/</guid>
+      <description>CSS中有两种盒子模型,一种是W3C标准的盒子模型(content-box),另一种是IE标准的(怪异)盒子模型(border-box). 标</description>
     </item>
     
     <item>
       <title>HTML常用标签</title>
-      <link>https://liuwb.top/posts/html%E5%B8%B8%E7%94%A8%E6%A0%87%E7%AD%BE/</link>
+      <link>https://example.com/posts/html%E5%B8%B8%E7%94%A8%E6%A0%87%E7%AD%BE/</link>
       <pubDate>Sun, 10 May 2020 23:00:25 +0800</pubDate>
       
-      <guid>https://liuwb.top/posts/html%E5%B8%B8%E7%94%A8%E6%A0%87%E7%AD%BE/</guid>
-      <description>html 中有大约110个标签,那是不是这么多的标签我们都需要将其强记下来呢?不,我们只需要记住一些常用的 html 标签,那些不常用的标签,当我们碰到了要使用的情况,再去 MDN 查询即可.话不多说,一起来看看吧
-HTML常用标签 a 标签 table 标签 img 标签 from 标签 input 标签 其他输入标签 a 标签 a 标签的作用  跳转到外部页面 跳转到内部锚点 跳转到邮箱或电话等  a 标签的属性  herf target download rel = noopener  1. herf 的取值 网址
-在 a 标签的 href 里面,我们可以入以 http//: , https//: 和 //为头的网址,一般我们用 // 为主,因为它的兼容性最好.
- &amp;lt;a href=&amp;quot;//baidu.com&amp;quot;&amp;gt;百度&amp;lt;/a&amp;gt;  路径
-可以在 href 属性中填入路径.
-&amp;lt;a href=&amp;quot;/a/b/c.html&amp;quot;&amp;gt;c.html&amp;lt;/a&amp;gt; &amp;lt;a href=&amp;quot;a/b/c.html&amp;quot;&amp;gt;c.html&amp;lt;/a&amp;gt; &amp;lt;a href=&amp;quot;index.html&amp;quot;&amp;gt;index.html&amp;lt;/a&amp;gt; &amp;lt;a href=&amp;quot;/index.html&amp;quot;&amp;gt;index.html&amp;lt;/a&amp;gt;  注意,如果你写链接的最前面有 / 的时候,在预览时需要在终端用 http-server -c-1 或者 percel xxx.</description>
+      <guid>https://example.com/posts/html%E5%B8%B8%E7%94%A8%E6%A0%87%E7%AD%BE/</guid>
+      <description>html 中有大约110个标签,那是不是这么多的标签我们都需要将其强记下来呢?不,我们只需要记住一些常用的 html 标签,那些不常用的标签,当我们碰到了要使</description>
     </item>
     
     <item>
       <title>HTML入门笔记1</title>
-      <link>https://liuwb.top/posts/html%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/</link>
+      <link>https://example.com/posts/html%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/</link>
       <pubDate>Sun, 10 May 2020 15:15:10 +0800</pubDate>
       
-      <guid>https://liuwb.top/posts/html%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/</guid>
-      <description>万维网是什么  WWW = URL + HTTP + HTML  WWW( World Wide Web ),中文直译为像世界那么大的网,就是万维网.
-万维网的诞生 在1990年,Tim Berners-Lee为了让每个人输入网址就能看到网页,但是当时并没有网址,于是发明了URL,有了网址没有页面就没有什么可以看的,于是就发明了HTML,最后为了完善这个系统化,就有了HTTP的诞生,以此为基础写了第一个浏览器和第一个服务器,并使用浏览器问了服务器,于是Tim Berners-Lee成为了&amp;rdquo;网上冲浪&amp;rdquo;第一人.
-HTML历史 HTML诞生于Tim Berners-Lee的一篇叫做 HTML Tags 的文章,最原始的HTML非常简陋,只有18个标签,经过长时间的迭代,如今的标签大约已有110个.
-HTML起手式 Emmet感叹号
-&amp;lt;!DOCTYPE html&amp;gt; &amp;lt;html lang=&amp;quot;en&amp;quot;&amp;gt; &amp;lt;head&amp;gt; &amp;lt;meta charset=&amp;quot;UTF-8&amp;quot;&amp;gt; &amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;quot;width=device-width, initial-scale=1.0&amp;quot;&amp;gt; &amp;lt;title&amp;gt;Document&amp;lt;/title&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt;  章节标签 表示文章的层级
-   标签 作用 标签 作用     h1~h6 文章各级标题 footer 脚部   section 章节 main 主要内容   article 文章  旁支内容   p 段落 div 划分区域   header 头部      全局属性 所有标签都有的属性</description>
+      <guid>https://example.com/posts/html%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/</guid>
+      <description>万维网是什么 WWW = URL + HTTP + HTML WWW( World Wide Web ),中文直译为像世界那么大的网,就是万维网. 万维网的诞生 在1990年,Tim Berners-Lee为了让每</description>
     </item>
     
     <item>
       <title>如何搭建个人博客</title>
-      <link>https://liuwb.top/posts/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</link>
+      <link>https://example.com/posts/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</link>
       <pubDate>Sat, 09 May 2020 14:19:59 +0800</pubDate>
       
-      <guid>https://liuwb.top/posts/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</guid>
-      <description>使用Hugo+GitHub搭建个人博客 步骤1:安装 Hugo 可以去 Hugo releases 页面下载合适的 Hugo 安装,安装完成后测试Hugo是否安装成功,在 Cmder 中执行下面代码:
- hugo version  步骤2:建立新的网站  hugo new site quickstart  进入一个合适的目录,在 Cmder 中执行上面的代码,将 quickstart 替换为 username.github.io-creator,其中 username 为你在 GitHub 上全小写的用户名.
-步骤3:创建主题 进入新建好的网站,输入下面的代码,可进入 Hugo Themes 页面选择喜欢的主题,并替换第二条代码.
-git init git submodule add https://github.com/budparr/gohugo-theme-ananke.git themes/ananke  然后将主题添加至配置 config.toml 中:
- echo &#39;theme = &amp;quot;你所下载的主题名称&amp;quot;&#39; &amp;gt;&amp;gt; config.toml  没有下载 git 的用户,可自行安装 git ,或者进入主题页面直接下载主题压缩包,解压后改名为对应的主题名称,并移至 &amp;ldquo; themes\ &amp;ldquo; 目录下
-步骤4:编写第一篇博客 可输入下面的代码,创建一个新的文章
- hugo new posts/第一篇博客.</description>
+      <guid>https://example.com/posts/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</guid>
+      <description>使用Hugo+GitHub搭建个人博客 步骤1:安装 Hugo 可以去 Hugo releases 页面下载合适的 Hugo 安装,安装完成后测试Hugo是否安装成功,在 Cmder 中执行下面代码:</description>
     </item>
     
     <item>
       <title>第一篇博客</title>
-      <link>https://liuwb.top/posts/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</link>
+      <link>https://example.com/posts/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</link>
       <pubDate>Sat, 09 May 2020 10:40:05 +0800</pubDate>
       
-      <guid>https://liuwb.top/posts/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</guid>
+      <guid>https://example.com/posts/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</guid>
       <description>第一篇博客 我的第一篇博客</description>
     </item>
     

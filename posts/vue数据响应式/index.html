@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>Vue数据响应式 | Clown的博客</title>
+
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">    
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="Vue 数据响应式 &ldquo;响应式&rdquo;是指一个物体对外界的刺激做出反应.Vue数据响应式是指,当 data 数据改变时,Vue会通知使用该数据">
+<meta name="generator" content="Hugo 0.57.2" />
+
+
+  <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+
+ 
+  
+
+
+
+
+
+
+
+  </head>
+
+  <body>
+    <nav class="navigation">
+	
+		<a href="/"> <span class="arrow">←</span>首页</a>
+	
+	<a href="/posts">归档</a>
+	<a href="/tags">标签</a>
+
+
+	
+
+
+
+
+</nav>
+
+
+    <main class="main">
+      
+
+<section id="single">
+    <h1 class="title">Vue数据响应式</h1>
+
+    <div class="tip">
+        <time datetime="2020-06-09 20:24:22 &#43;0800 CST">2020年06月09日</time>
+        <span class="split">
+          ·
+        </span>
+        <span>
+          wordCount
+        </span>
+        <span class="split">
+          ·
+        </span>
+        <span>
+          3分钟
+        </span>
+    </div>
+
+    
+    
+        
+  
+    <aside class="toc">
+      <details>
+          <summary>Table of Contents
+          </summary>
+          <div>
+              <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#vue-数据响应式">Vue 数据响应式</a>
+<ul>
+<li>
+<ul>
+<li><a href="#那如果我们要添加新的属性怎么办">那如果我们要添加新的属性怎么办?</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#vue-中的-bug">Vue 中的 bug</a>
+<ul>
+<li><a href="#object-defineproperty-的问题">Object.defineProperty 的问题</a>
+<ul>
+<li><a href="#vue-set-和-this-set"><code>Vue.set</code> 和 <code>this.$set</code></a></li>
+</ul></li>
+<li><a href="#data-中有数组">data 中有数组</a></li>
+</ul></li>
+<li><a href="#我对数据格式化的理解">我对数据格式化的理解</a></li>
+</ul></li>
+</ul>
+</nav>
+          </div>
+      </details>
+    </aside>
+  
+
+
+    
+
+
+    <div class="content">
+      
+
+<h2 id="vue-数据响应式">Vue 数据响应式</h2>
+
+<p>&ldquo;响应式&rdquo;是指一个物体对外界的刺激做出反应.<code>Vue数据响应式</code>是指,当 data 数据改变时,<code>Vue</code>会通知使用该数据的代码,那么这是为什么呢?我们看下面的例子</p>
+
+<pre><code class="language-javascript">//例一
+const myData = {
+  n: 0,
+};
+console.log(myData); // {n:0}
+let vm = new Vue({
+  el: &quot;#app&quot;,
+  template: `
+   &lt;div&gt;{{n}}
+   &lt;button @click=&quot;add&quot;&gt;+1&lt;/button&gt;
+   &lt;/div&gt;
+  `,
+  data: myData,
+  methods: {
+    add() {
+      this.n += 1;
+      console.log(myData); //{n:(...)}
+    },
+  },
+});
+</code></pre>
+
+<p>我们可以看到,当点击按钮后, <code>myData</code> 发生了改变,这是为什么呢?再看下面这个例子</p>
+
+<pre><code class="language-javascript">//例子二
+let obj1 = {
+  姓: &quot;高&quot;,
+  名: &quot;圆圆&quot;,
+  姓名() {
+    return this.姓 + this.名;
+  },
+};
+console.log(obj1.姓名()); //高圆圆
+
+let obj2 = {
+  姓: &quot;高&quot;,
+  名: &quot;圆圆&quot;,
+  get 姓名() {
+    return this.姓 + this.名;
+  },
+};
+console.log(obj2.姓名); //高圆圆
+
+let obj3 = {
+  姓: &quot;高&quot;,
+  名: &quot;圆圆&quot;,
+  get 姓名() {
+    return this.姓 + this.名;
+  },
+  set 姓名(xxx) {
+    this.姓 = xxx[0];
+    this.名 = xxx.substring(1);
+  },
+};
+obj3.姓名 = &quot;刘诗诗&quot;;
+console.log(obj3.姓名); //刘诗诗
+console.log(obj3); // {姓名:(...)}
+</code></pre>
+
+<p>例子二和例子一相比,可以看出,在<code>data</code> 发生改变后,两个例子都发生了同样的改变,按照例子二推论下来,可以看出来,例子一的<code>n</code>同样被放入了 <code>get</code> 和 <code>set</code>.我们可以得出看到,在<code>obj3</code>中,我们可以读和改这个<code>姓名</code>这个属性,但是这个属性实际上是不存在的.</p>
+
+<h4 id="那如果我们要添加新的属性怎么办">那如果我们要添加新的属性怎么办?</h4>
+
+<p><code>Object.defineProperty(obj,'n',{...})</code> 可以给对象添加属性 <code>value</code>,可以给对象添加 <code>getter/setter</code>.</p>
+
+<pre><code class="language-javascript">//例三
+let _xxx = 0;
+Object.defineProperty(obj3, &quot;xxx&quot;, {
+  get() {
+    return _xxx;
+  },
+  set(value) {
+    _xxx = value;
+  },
+});
+console.log(obj3);
+</code></pre>
+
+<p>可以发现,<code>obj3</code> 多出了<code>xxx</code>这个不存在的属性.</p>
+
+<p>知道了上面这些理论和方法之后,我们现在来了解一下,为什么 <code>data</code> 会产生变化</p>
+
+<pre><code class="language-javascript">let myData5 = {n:0}
+let data5 = proxy2({ data:myData5 })
+function proxy2({data}){
+  let value = data.n
+  Object.defineProperty(data, 'n', {
+    get(){
+      return value
+    },
+    set(newValue){
+      if(newValue&lt;0)return
+      value = newValue
+    }
+  })
+</code></pre>
+
+<p>经过一系列的推理,可以得出上面的这串代码,可以看到<code>let data5 = proxy2({ data:myData5 })</code>和<code>let vm = new Vue({data:myData})</code> 很相似,所以我们可以知道,当<code>let vm = new Vue({data:myData})</code> 就是让 <code>vm</code> 成为 <code>myData</code> 的代理,同时对 <code>myData</code> 上的所有属性进行监控,这是为了防止其变化了,<code>vm</code> 却不知道.</p>
+
+<p>所以当 <code>vm</code> 得到属性变化的通知时,就会 render(data)</p>
+
+<h2 id="vue-中的-bug">Vue 中的 bug</h2>
+
+<h3 id="object-defineproperty-的问题">Object.defineProperty 的问题</h3>
+
+<p>当我们使用 <code>Object.defineProperty(obj,'n',{...})</code> 方法时,必须得先设置一个 <code>'n'</code> 这样才能够进行 <code>监听和代理</code> ,如果一开始并没有给出 <code>n</code> 怎么办?</p>
+
+<pre><code class="language-javascript">// bug 1
+new Vue({
+  data: {},
+  template: `
+    &lt;div&gt;{{n}}&lt;/div&gt;
+  `,
+}).$mount(&quot;#app&quot;);
+</code></pre>
+
+<pre><code class="language-javascript">// bug 2
+new Vue({
+  data: {
+    obj: {
+      a: 0, // obj.a 会被 Vue 监听 &amp; 代理
+    },
+  },
+  template: `
+    &lt;div&gt;
+      {{obj.b}}
+      &lt;button @click=&quot;setB&quot;&gt;set b&lt;/button&gt;
+    &lt;/div&gt;
+  `,
+  methods: {
+    setB() {
+      this.obj.b = 1; //请问，页面中会显示 1 吗？
+    },
+  },
+}).$mount(&quot;#app&quot;);
+</code></pre>
+
+<p>Vue 没办法监听一开始不存在的 obj.b</p>
+
+<p>解决办法:</p>
+
+<ol>
+<li>一开始就把 <code>key</code> 都声明好,后面不再加入属性</li>
+<li>使用 <code>Vue.set</code> 或者 <code>this.$set</code></li>
+</ol>
+
+<h4 id="vue-set-和-this-set"><code>Vue.set</code> 和 <code>this.$set</code></h4>
+
+<p>作用:</p>
+
+<ul>
+<li>新增 <code>key</code></li>
+<li>自动创建代理和监听(如果没有创建过)</li>
+<li>触发 UI 更新(但不会立即触发)</li>
+</ul>
+
+<h3 id="data-中有数组">data 中有数组</h3>
+
+<p>没有办法提前声明所有<code>key</code></p>
+
+<pre><code class="language-javascript">new Vue({
+  data: {
+    array: [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;],
+  },
+  template: `
+    &lt;div&gt;
+      {{array}}
+      &lt;button @click=&quot;setD&quot;&gt;set d&lt;/button&gt;
+    &lt;/div&gt;
+  `,
+  methods: {
+    setD() {
+      this.array[3] = &quot;d&quot;; //请问，页面中会显示 'd' 吗？
+      // 等下，你为什么不用 this.array.push('d')
+    },
+  },
+}).$mount(&quot;#app&quot;);
+</code></pre>
+
+<p>解决方法:尤雨溪篡改了 7 个数组的 API,可以进行数组的增删,这 7 个 API 会自动处理监听和代理,并更新 UI</p>
+
+<h2 id="我对数据格式化的理解">我对数据格式化的理解</h2>
+
+<p>通过上面知识的学习和理解,我认为数据格式化就像是人的非条件反射,当人手指碰到刺痛,灼热等,手部的感觉神经就会通知神经中枢,再由神经中枢发送响应给手部的运动神经,人就会立刻缩回手;在 Vue 中,当监听到 data 发生变化时,Vue 会通知 vm ,再由 vm 进行 render(data).</p>
+
+    </div>
+
+    
+    
+    
+  <div id="comment">
+    
+    
+  </div>
+
+
+</section>
+
+
+    </main>
+    
+    <footer id="footer">
+    
+        <div id="social">
+
+
+    <a class="symbol" href="https://github.com/LWeibing" rel="me" target="_blank">
+        
+        <svg fill="#bbbbbb" width="28" height="28"  viewBox="0 0 72 72" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    
+    <title>Github</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Social-Icons---Rounded-Black" transform="translate(-264.000000, -939.000000)">
+            <g id="Github" transform="translate(264.000000, 939.000000)">
+                <path d="M8,72 L64,72 C68.418278,72 72,68.418278 72,64 L72,8 C72,3.581722 68.418278,-8.11624501e-16 64,0 L8,0 C3.581722,8.11624501e-16 -5.41083001e-16,3.581722 0,8 L0,64 C5.41083001e-16,68.418278 3.581722,72 8,72 Z" id="Rounded" fill="#bbbbbb"></path>
+                <path d="M35.9985,13 C22.746,13 12,23.7870921 12,37.096644 C12,47.7406712 18.876,56.7718301 28.4145,59.9584121 C29.6145,60.1797862 30.0525,59.4358488 30.0525,58.7973276 C30.0525,58.2250681 30.0315,56.7100863 30.0195,54.6996482 C23.343,56.1558981 21.9345,51.4693938 21.9345,51.4693938 C20.844,48.6864054 19.2705,47.9454799 19.2705,47.9454799 C17.091,46.4500754 19.4355,46.4801943 19.4355,46.4801943 C21.843,46.6503662 23.1105,48.9634994 23.1105,48.9634994 C25.2525,52.6455377 28.728,51.5823398 30.096,50.9649018 C30.3135,49.4077535 30.9345,48.3460615 31.62,47.7436831 C26.2905,47.1352808 20.688,45.0691228 20.688,35.8361671 C20.688,33.2052792 21.6225,31.0547881 23.1585,29.3696344 C22.911,28.7597262 22.0875,26.3110578 23.3925,22.9934585 C23.3925,22.9934585 25.4085,22.3459017 29.9925,25.4632101 C31.908,24.9285993 33.96,24.6620468 36.0015,24.6515052 C38.04,24.6620468 40.0935,24.9285993 42.0105,25.4632101 C46.5915,22.3459017 48.603,22.9934585 48.603,22.9934585 C49.9125,26.3110578 49.089,28.7597262 48.8415,29.3696344 C50.3805,31.0547881 51.309,33.2052792 51.309,35.8361671 C51.309,45.0917119 45.6975,47.1292571 40.3515,47.7256117 C41.2125,48.4695491 41.9805,49.9393525 41.9805,52.1877301 C41.9805,55.4089489 41.9505,58.0067059 41.9505,58.7973276 C41.9505,59.4418726 42.3825,60.1918338 43.6005,59.9554002 C53.13,56.7627944 60,47.7376593 60,37.096644 C60,23.7870921 49.254,13 35.9985,13" fill="#FFFFFF"></path>
+            </g>
+        </g>
+    </g>
+</svg>
+    </a>
+
+
+</div>
+
+    
+
+    <div class="copyright">
+    
+       © Copyright 
+       2024 
+       <span class="split">
+        <svg fill="#bbbbbb" width="15" height="15" version="1.1" id="heart-15" xmlns="http://www.w3.org/2000/svg" width="15px" height="15px" viewBox="0 0 15 15">
+  <path d="M13.91,6.75c-1.17,2.25-4.3,5.31-6.07,6.94c-0.1903,0.1718-0.4797,0.1718-0.67,0C5.39,12.06,2.26,9,1.09,6.75&#xA;&#x9;C-1.48,1.8,5-1.5,7.5,3.45C10-1.5,16.48,1.8,13.91,6.75z"/>
+</svg>
+       </span>
+       WB
+    
+    </div>
+
+    
+      <div class="powerby">
+        Powered by <a href='http://www.gohugo.io/'>Hugo</a> Theme By <a href='https://github.com/nodejh/hugo-theme-mini'>nodejh</a>
+      </div>
+    
+</footer>
+
+
+
+  </body>
+</html>

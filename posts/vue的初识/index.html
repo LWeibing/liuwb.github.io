@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>Vue的初识 | Clown的博客</title>
+
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">    
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="Vue Vue 的作者是尤雨溪,英文名为 Evan You.Vue 是一套用于构建用户见面的渐进式框架,主要关注的是 V(视图层),M(数据模型)和 C(控制器)则被简化. Vue 项目的">
+<meta name="generator" content="Hugo 0.57.2" />
+
+
+  <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+
+ 
+  
+
+
+
+
+
+
+
+  </head>
+
+  <body>
+    <nav class="navigation">
+	
+		<a href="/"> <span class="arrow">←</span>首页</a>
+	
+	<a href="/posts">归档</a>
+	<a href="/tags">标签</a>
+
+
+	
+
+
+
+
+</nav>
+
+
+    <main class="main">
+      
+
+<section id="single">
+    <h1 class="title">Vue的初识</h1>
+
+    <div class="tip">
+        <time datetime="2020-06-08 19:02:11 &#43;0800 CST">2020年06月08日</time>
+        <span class="split">
+          ·
+        </span>
+        <span>
+          wordCount
+        </span>
+        <span class="split">
+          ·
+        </span>
+        <span>
+          2分钟
+        </span>
+    </div>
+
+    
+    
+        
+  
+    <aside class="toc">
+      <details>
+          <summary>Table of Contents
+          </summary>
+          <div>
+              <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#vue">Vue</a></li>
+<li><a href="#vue-项目的搭建">Vue 项目的搭建</a>
+<ul>
+<li><a href="#使用-vue-cli">使用 @vue/cli</a></li>
+<li><a href="#codesandbox-网站">CodeSandbox 网站</a></li>
+<li><a href="#自己搭建">自己搭建</a></li>
+</ul></li>
+<li><a href="#使用-vue-实例">使用 Vue 实例</a>
+<ul>
+<li><a href="#从-html-得到视图">从 HTML 得到视图</a></li>
+<li><a href="#用-js-构建视图">用 JS 构建视图</a></li>
+<li><a href="#使用-vue-loader">使用 vue-loader</a></li>
+</ul></li>
+<li><a href="#完整版和非完整版的区别">完整版和非完整版的区别</a></li>
+</ul></li>
+</ul>
+</nav>
+          </div>
+      </details>
+    </aside>
+  
+
+
+    
+
+
+    <div class="content">
+      
+
+<h2 id="vue">Vue</h2>
+
+<p><code>Vue</code> 的作者是尤雨溪,英文名为 Evan You.<code>Vue</code> 是一套用于构建用户见面的渐进式框架,主要关注的是 V(视图层),M(数据模型)和 C(控制器)则被简化.</p>
+
+<h2 id="vue-项目的搭建">Vue 项目的搭建</h2>
+
+<h3 id="使用-vue-cli">使用 @vue/cli</h3>
+
+<ol>
+<li>搜索@vue/cil,进入官网</li>
+<li>打开文档,打开 创建一个项目 章节</li>
+<li>全局安装,在终端运行命令行 <code>yarn global add @vue/cli</code></li>
+<li>选择使用的配置</li>
+<li>在终端运行命令 <code>vue create 文件夹名</code> 即可创建一个 Vue 项目</li>
+</ol>
+
+<h3 id="codesandbox-网站">CodeSandbox 网站</h3>
+
+<ol>
+<li>在浏览器地址栏输入<code>codesandbox.io</code></li>
+<li>选择 <code>vue</code> 项目,即可创建项目</li>
+<li>可以根据自己的需求在网站上进行项目制作</li>
+<li>可以选择 File -&gt; Export to ZIP 将文件下载至本地</li>
+<li>解压文件压缩包,用 <code>VScode</code> 或 <code>WebStorm</code> 打开即可</li>
+</ol>
+
+<h3 id="自己搭建">自己搭建</h3>
+
+<ol>
+<li>使用 <code>webpack</code> 或者 <code>rollup</code> 进行搭建</li>
+<li>这里不做详细介绍,可参考 <code>https://www.jianshu.com/p/f502380062d1</code></li>
+<li>该方式不适合新手,适合使用<code>Vue</code>半年以上的老手</li>
+</ol>
+
+<h2 id="使用-vue-实例">使用 Vue 实例</h2>
+
+<h3 id="从-html-得到视图">从 HTML 得到视图</h3>
+
+<p>使用完整版的<code>Vue</code></p>
+
+<ul>
+<li><p>网页中引入 <code>vue.js</code> 或者 <code>vue.min.js</code> 文件</p>
+
+<pre><code class="language-javascript">&lt;script src=&quot;https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.min.js&quot;&gt;&lt;/script&gt;
+</code></pre></li>
+
+<li><p>用 <code>import</code> 引用 <code>vue.js</code> 或者 <code>vue.min.js</code> 文件</p>
+
+<pre><code class="language-javascript">import Demo from &quot;./vue.min.js&quot;;
+</code></pre></li>
+</ul>
+
+<h3 id="用-js-构建视图">用 JS 构建视图</h3>
+
+<p>使用非完整版的<code>Vue</code></p>
+
+<ul>
+<li><p>网页中引入 <code>vue.runtime.js</code> 或者 <code>vue.runtime.min.js</code></p>
+
+<pre><code class="language-javascript">&lt;script src=&quot;https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.runtime.min.js&quot;&gt;&lt;/script&gt;
+</code></pre></li>
+
+<li><p>用 <code>import</code> 引用 <code>vue.runtime.js</code> 或者 <code>vue.runtime.min.js</code></p>
+
+<pre><code class="language-javascript">import Demo from &quot;./vue.runtime.min.js&quot;;
+</code></pre></li>
+</ul>
+
+<h3 id="使用-vue-loader">使用 vue-loader</h3>
+
+<ol>
+<li><p>创建一个 .vue 的文件</p>
+
+<pre><code class="language-javascript">&lt;template&gt;
+&lt;div class=&quot;red&quot;&gt;
+    {{n}}
+    &lt;button @click=&quot;add&quot;&gt;+1&lt;/button&gt;
+&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+data() {
+    return {
+    n: 0
+    };
+},
+methods: {
+    add() {
+    this.n += 1;
+    }
+}
+};
+&lt;/script&gt;
+&lt;style scoped&gt;
+.red {
+color: red;
+}
+&lt;/style&gt;
+</code></pre></li>
+
+<li><p>再将该文件用 <code>import</code> 引用</p>
+
+<pre><code>import Demo from &quot;./Demo.vue&quot;;
+</code></pre></li>
+
+<li><p>将.vue 文件翻译成 h 构建方法</p>
+
+<pre><code class="language-javascript">new Vue({
+  el: &quot;#app&quot;,
+  render(h) {
+    return h(Demo);
+  },
+});
+</code></pre></li>
+</ol>
+
+<p>注意:</p>
+
+<ul>
+<li>使用该方法会导致 <code>HTML</code> 只有一个 div#app,SEO 不友好</li>
+<li>解决:把 <code>title</code>, <code>description</code>, <code>keyword</code>, <code>h1</code>, <code>a</code> 写好即可</li>
+</ul>
+
+<h2 id="完整版和非完整版的区别">完整版和非完整版的区别</h2>
+
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">Vue 完整版</th>
+<th align="center">Vue 非完整版</th>
+<th align="center">评价</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">特点</td>
+<td align="center">有 complier</td>
+<td align="center">没有 complier</td>
+<td align="center">complier 占 40% 体积</td>
+</tr>
+
+<tr>
+<td align="center">视图</td>
+<td align="center">写在 HTML 里或者 template 选项</td>
+<td align="center">写在 render 函数里,用 h 来创建</td>
+<td align="center">h 是尤雨溪写好传给 render 的</td>
+</tr>
+
+<tr>
+<td align="center">cdn 引入</td>
+<td align="center">vue.js</td>
+<td align="center">vue.runtime.js</td>
+<td align="center">文件名不同,生成的换件后缀为 .min.js</td>
+</tr>
+
+<tr>
+<td align="center">webpack 引入</td>
+<td align="center">需要配置 alias</td>
+<td align="center">默认使用此版</td>
+<td align="center">尤雨溪配置的</td>
+</tr>
+
+<tr>
+<td align="center">@vue/cli 引入</td>
+<td align="center">需要额外配置</td>
+<td align="center">默认使用此版</td>
+<td align="center">尤雨溪,蒋豪群配置的</td>
+</tr>
+</tbody>
+</table>
+
+<ul>
+<li><p>完整版的 <code>template</code> 可以写在 <code>HTML</code> 里面,也可以在 <code>JS</code> 里面,非完整版不支持<code>template</code></p>
+
+<pre><code class="language-javascript">new Vue({
+el: &quot;#app&quot;,
+//完整版用法
+template: `
+  &lt;div&gt;{{n}}&lt;/div&gt;
+`,
+data: {
+  n: 0,
+},
+methods: {
+  add() {
+    this.n += 1;
+  },
+},
+});
+</code></pre></li>
+
+<li><p>非完整版需要用 <code>render()</code>,传入一个参数 <code>h</code>,并将其返回</p>
+
+<pre><code class="language-javascript">new Vue({
+el: &quot;#app&quot;,
+render(h) {
+  // 不完整版用法
+  return h(&quot;div&quot;, [this.n, h(&quot;button&quot;, { on: { click: this.add } }, &quot;+1&quot;)]);
+},
+data: {
+  n: 0,
+},
+methods: {
+  add() {
+    this.n += 1;
+  },
+},
+});
+</code></pre></li>
+
+<li><p>完整版有 <code>complier</code>,非完整版没有<code>complier</code>,体积相比,前者体积比后者体积大<code>40%</code></p></li>
+
+<li><p>非完整版更加独立,看上去很不方便,但是更为正确的</p></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+  <div id="comment">
+    
+    
+  </div>
+
+
+</section>
+
+
+    </main>
+    
+    <footer id="footer">
+    
+        <div id="social">
+
+
+    <a class="symbol" href="https://github.com/LWeibing" rel="me" target="_blank">
+        
+        <svg fill="#bbbbbb" width="28" height="28"  viewBox="0 0 72 72" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    
+    <title>Github</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Social-Icons---Rounded-Black" transform="translate(-264.000000, -939.000000)">
+            <g id="Github" transform="translate(264.000000, 939.000000)">
+                <path d="M8,72 L64,72 C68.418278,72 72,68.418278 72,64 L72,8 C72,3.581722 68.418278,-8.11624501e-16 64,0 L8,0 C3.581722,8.11624501e-16 -5.41083001e-16,3.581722 0,8 L0,64 C5.41083001e-16,68.418278 3.581722,72 8,72 Z" id="Rounded" fill="#bbbbbb"></path>
+                <path d="M35.9985,13 C22.746,13 12,23.7870921 12,37.096644 C12,47.7406712 18.876,56.7718301 28.4145,59.9584121 C29.6145,60.1797862 30.0525,59.4358488 30.0525,58.7973276 C30.0525,58.2250681 30.0315,56.7100863 30.0195,54.6996482 C23.343,56.1558981 21.9345,51.4693938 21.9345,51.4693938 C20.844,48.6864054 19.2705,47.9454799 19.2705,47.9454799 C17.091,46.4500754 19.4355,46.4801943 19.4355,46.4801943 C21.843,46.6503662 23.1105,48.9634994 23.1105,48.9634994 C25.2525,52.6455377 28.728,51.5823398 30.096,50.9649018 C30.3135,49.4077535 30.9345,48.3460615 31.62,47.7436831 C26.2905,47.1352808 20.688,45.0691228 20.688,35.8361671 C20.688,33.2052792 21.6225,31.0547881 23.1585,29.3696344 C22.911,28.7597262 22.0875,26.3110578 23.3925,22.9934585 C23.3925,22.9934585 25.4085,22.3459017 29.9925,25.4632101 C31.908,24.9285993 33.96,24.6620468 36.0015,24.6515052 C38.04,24.6620468 40.0935,24.9285993 42.0105,25.4632101 C46.5915,22.3459017 48.603,22.9934585 48.603,22.9934585 C49.9125,26.3110578 49.089,28.7597262 48.8415,29.3696344 C50.3805,31.0547881 51.309,33.2052792 51.309,35.8361671 C51.309,45.0917119 45.6975,47.1292571 40.3515,47.7256117 C41.2125,48.4695491 41.9805,49.9393525 41.9805,52.1877301 C41.9805,55.4089489 41.9505,58.0067059 41.9505,58.7973276 C41.9505,59.4418726 42.3825,60.1918338 43.6005,59.9554002 C53.13,56.7627944 60,47.7376593 60,37.096644 C60,23.7870921 49.254,13 35.9985,13" fill="#FFFFFF"></path>
+            </g>
+        </g>
+    </g>
+</svg>
+    </a>
+
+
+</div>
+
+    
+
+    <div class="copyright">
+    
+       © Copyright 
+       2024 
+       <span class="split">
+        <svg fill="#bbbbbb" width="15" height="15" version="1.1" id="heart-15" xmlns="http://www.w3.org/2000/svg" width="15px" height="15px" viewBox="0 0 15 15">
+  <path d="M13.91,6.75c-1.17,2.25-4.3,5.31-6.07,6.94c-0.1903,0.1718-0.4797,0.1718-0.67,0C5.39,12.06,2.26,9,1.09,6.75&#xA;&#x9;C-1.48,1.8,5-1.5,7.5,3.45C10-1.5,16.48,1.8,13.91,6.75z"/>
+</svg>
+       </span>
+       WB
+    
+    </div>
+
+    
+      <div class="powerby">
+        Powered by <a href='http://www.gohugo.io/'>Hugo</a> Theme By <a href='https://github.com/nodejh/hugo-theme-mini'>nodejh</a>
+      </div>
+    
+</footer>
+
+
+
+  </body>
+</html>

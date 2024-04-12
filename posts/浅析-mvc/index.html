@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>浅析 MVC | Clown的博客</title>
+
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">    
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="MVC MVC 全名是Model View Controller是一种架构设计模式,将数据,界面的显示分离开来,当用户更新页面时,不需要重新编写全部代码.相当于把">
+<meta name="generator" content="Hugo 0.57.2" />
+
+
+  <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+
+ 
+  
+
+
+
+
+
+
+
+  </head>
+
+  <body>
+    <nav class="navigation">
+	
+		<a href="/"> <span class="arrow">←</span>首页</a>
+	
+	<a href="/posts">归档</a>
+	<a href="/tags">标签</a>
+
+
+	
+
+
+
+
+</nav>
+
+
+    <main class="main">
+      
+
+<section id="single">
+    <h1 class="title">浅析 MVC</h1>
+
+    <div class="tip">
+        <time datetime="2020-06-04 21:32:02 &#43;0800 CST">2020年06月04日</time>
+        <span class="split">
+          ·
+        </span>
+        <span>
+          wordCount
+        </span>
+        <span class="split">
+          ·
+        </span>
+        <span>
+          3分钟
+        </span>
+    </div>
+
+    
+    
+        
+  
+    <aside class="toc">
+      <details>
+          <summary>Table of Contents
+          </summary>
+          <div>
+              <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#mvc">MVC</a></li>
+<li><a href="#抽象思维">抽象思维</a>
+<ul>
+<li><a href="#最小知识原则">最小知识原则</a></li>
+<li><a href="#以不变应万变">以不变应万变</a></li>
+<li><a href="#表驱动编程">表驱动编程</a></li>
+<li><a href="#事不过三">事不过三</a></li>
+<li><a href="#view-render-data">view = render(data)</a></li>
+<li><a href="#俯瞰全局">俯瞰全局</a></li>
+</ul></li>
+<li><a href="#eventbus">EventBus</a></li>
+<li><a href="#如何理解模块化">如何理解模块化</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+          </div>
+      </details>
+    </aside>
+  
+
+
+    
+
+
+    <div class="content">
+      
+
+<h3 id="mvc">MVC</h3>
+
+<p><code>MVC</code> 全名是Model View Controller是一种架构设计模式,将数据,界面的显示分离开来,当用户更新页面时,不需要重新编写全部代码.相当于把适用于一些任务的&rdquo;工具&rdquo;放在一起,当遇到类似的任务时,就可以用这个&rdquo;工具包&rdquo;,不用再去一个个的寻找,也可以说 <code>MVC</code> 是万金油,适用于大部分情况.</p>
+
+<p><code>MVC</code>每个模块可以分为三个对象:</p>
+
+<ul>
+<li><p>M - Model (数据模型) 负责操作所有数据</p>
+
+<pre><code class="language-javascript">const m = {
+    data: {
+        n: parseInt(localStorage.getItem('n'))
+    },
+    update(data){
+        Object.assign(m.data,data)
+        eventBar.trigger('m-updated')
+    }
+}
+</code></pre></li>
+
+<li><p>V - View (视图) 负责所有 UI 界面</p>
+
+<pre><code class="language-javascript">const c = {
+    init(container) {
+        v.init(container)
+        v.render(m.data.n)
+        c.bindEvent()
+        eventBar.on('m-updated',()=&gt;{
+            v.render(m.data.n)
+        })
+    },
+
+    event: {
+        &quot;click #add&quot;: &quot;add&quot;,
+        &quot;click #sub&quot;: &quot;sub&quot;,
+        &quot;click #mul&quot;: &quot;mul&quot;,
+        &quot;click #div&quot;: &quot;div&quot;
+    },
+    add() {
+        m.update(m.data.n += 1)
+    },
+    sub() {
+        m.update( m.data.n -= 1)
+    },
+    mul() {
+        m.update( m.data.n *= 2)
+    },
+    div() {
+        m.update( m.data.n /= 2)
+    },
+    bindEvent() {
+        for (let key in c.event) {
+            const value = c[c.event[key]]
+            const spaceIndex = key.indexOf(' ')
+            const part1 = key.slice(0, spaceIndex)
+            const part2 = key.slice(spaceIndex)
+            v.el.on(part1, part2, value)
+        }
+    }
+}
+</code></pre></li>
+</ul>
+
+<p>注意:由于 C 中的业务太少,一般都会将 V C 合二为一</p>
+
+<h3 id="抽象思维">抽象思维</h3>
+
+<h4 id="最小知识原则">最小知识原则</h4>
+
+<p>引入一个模块需要引入<code>js</code>,于是我们可以将 <code>css</code> 引入 <code>js</code>,再将<code>js</code>引入<code>html</code>.
+你需要知道的知识越少越好,模块化奠定了这个基础</p>
+
+<p>main.js</p>
+
+<pre><code class="language-javascript">import &quot;./app1.js&quot;;
+</code></pre>
+
+<p>app1.js</p>
+
+<pre><code class="language-javascript">import &quot;./app1.css&quot;;
+import $ from &quot;jquery&quot;;
+</code></pre>
+
+<p>注意:这样做有一定的代价,在网速较慢的情况下,页面一开始会是一片空白,既没内容也没有样式,可以用菊花,骨架,占位内容或者SSR来解决该问题</p>
+
+<h4 id="以不变应万变">以不变应万变</h4>
+
+<p>每个模块都可以利用 M + V + C 搞定</p>
+
+<p>但是也有一定的弊端,第一,在需求简单的时候,会多出很多不需要的代码,第二,在遇到特殊情况的时候,做MVC会比较麻烦</p>
+
+<h4 id="表驱动编程">表驱动编程</h4>
+
+<p>表驱动编程是一种编程模式,作用是消除冗长的逻辑判断,提高了程序的可读性,减少了重复代码,降低了复杂度.</p>
+
+<pre><code class="language-javascript">event: {
+        &quot;click #add&quot;: &quot;add&quot;,
+        &quot;click #sub&quot;: &quot;sub&quot;,
+        &quot;click #mul&quot;: &quot;mul&quot;,
+        &quot;click #div&quot;: &quot;div&quot;
+    },
+bindEvent() {
+    for (let key in c.event) {
+        const value = c[c.event[key]]
+        const spaceIndex = key.indexOf(' ')
+        const part1 = key.slice(0, spaceIndex)
+        const part2 = key.slice(spaceIndex)
+        v.el.on(part1, part2, value)
+    }
+}
+</code></pre>
+
+<h4 id="事不过三">事不过三</h4>
+
+<ul>
+<li>同样的代码写了三遍,就应该抽成一个函数</li>
+<li>同样的属性写了三遍,就应该做成公用属性</li>
+<li>同样的原型写了三遍,就应该用继承</li>
+</ul>
+
+<p>注意:有的时候会造成继承层级太深,无法一下看懂代码,可以通过画图,写文档解决</p>
+
+<h4 id="view-render-data">view = render(data)</h4>
+
+<p>只要改变 data 就可以找到对应的 view ,比起操作DOM对象,操作render简单很多</p>
+
+<p>注意: render 粗狂的渲染比 DOM 操作浪费性能,可以用 虚拟DOM 解决,可以让 render 进行局部更新</p>
+
+<h4 id="俯瞰全局">俯瞰全局</h4>
+
+<p>把所有的对象看成一个点,一个点和一个点怎么通信,一个点和多个点怎么通信,多个点和多个点怎么通信,最终找出一个专用的负责通信,这个点就是 <code>event bus</code></p>
+
+<h3 id="eventbus">EventBus</h3>
+
+<p><code>EventBus</code>是一种事件发布订阅模式,借助 <code>EventBus</code> 我们可以很好的实现组件之间，服务之间，系统之间的解耦以及相互通信的问题。</p>
+
+<p>监听事件: on()</p>
+
+<pre><code class="language-javascript">eventBar.on('m-updated',()=&gt;{
+    v.render(m.data.n)
+})
+</code></pre>
+
+<p>触发事件: trigger()</p>
+
+<pre><code class="language-javascript">eventBar.trigger('m-updated')
+</code></pre>
+
+<h3 id="如何理解模块化">如何理解模块化</h3>
+
+<p>将一个复杂的页面或者程序,按照一定的规则(规范)封装成为几个模块或者文件.模块或者文件暴露出一些接口与外部其他模块或文件进行通信,这就是模块化.就像是生产一台手机,有些人负责生产电池,有的复杂手机外壳,有的负责主板等等,最后在统一调往一个地方,再进行拼合.
+模块化的好处就是减少代码的重复性,提高代码的重用性,便于代码的维护.</p>
+
+    </div>
+
+    
+    
+    
+  <div id="comment">
+    
+    
+  </div>
+
+
+</section>
+
+
+    </main>
+    
+    <footer id="footer">
+    
+        <div id="social">
+
+
+    <a class="symbol" href="https://github.com/LWeibing" rel="me" target="_blank">
+        
+        <svg fill="#bbbbbb" width="28" height="28"  viewBox="0 0 72 72" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    
+    <title>Github</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Social-Icons---Rounded-Black" transform="translate(-264.000000, -939.000000)">
+            <g id="Github" transform="translate(264.000000, 939.000000)">
+                <path d="M8,72 L64,72 C68.418278,72 72,68.418278 72,64 L72,8 C72,3.581722 68.418278,-8.11624501e-16 64,0 L8,0 C3.581722,8.11624501e-16 -5.41083001e-16,3.581722 0,8 L0,64 C5.41083001e-16,68.418278 3.581722,72 8,72 Z" id="Rounded" fill="#bbbbbb"></path>
+                <path d="M35.9985,13 C22.746,13 12,23.7870921 12,37.096644 C12,47.7406712 18.876,56.7718301 28.4145,59.9584121 C29.6145,60.1797862 30.0525,59.4358488 30.0525,58.7973276 C30.0525,58.2250681 30.0315,56.7100863 30.0195,54.6996482 C23.343,56.1558981 21.9345,51.4693938 21.9345,51.4693938 C20.844,48.6864054 19.2705,47.9454799 19.2705,47.9454799 C17.091,46.4500754 19.4355,46.4801943 19.4355,46.4801943 C21.843,46.6503662 23.1105,48.9634994 23.1105,48.9634994 C25.2525,52.6455377 28.728,51.5823398 30.096,50.9649018 C30.3135,49.4077535 30.9345,48.3460615 31.62,47.7436831 C26.2905,47.1352808 20.688,45.0691228 20.688,35.8361671 C20.688,33.2052792 21.6225,31.0547881 23.1585,29.3696344 C22.911,28.7597262 22.0875,26.3110578 23.3925,22.9934585 C23.3925,22.9934585 25.4085,22.3459017 29.9925,25.4632101 C31.908,24.9285993 33.96,24.6620468 36.0015,24.6515052 C38.04,24.6620468 40.0935,24.9285993 42.0105,25.4632101 C46.5915,22.3459017 48.603,22.9934585 48.603,22.9934585 C49.9125,26.3110578 49.089,28.7597262 48.8415,29.3696344 C50.3805,31.0547881 51.309,33.2052792 51.309,35.8361671 C51.309,45.0917119 45.6975,47.1292571 40.3515,47.7256117 C41.2125,48.4695491 41.9805,49.9393525 41.9805,52.1877301 C41.9805,55.4089489 41.9505,58.0067059 41.9505,58.7973276 C41.9505,59.4418726 42.3825,60.1918338 43.6005,59.9554002 C53.13,56.7627944 60,47.7376593 60,37.096644 C60,23.7870921 49.254,13 35.9985,13" fill="#FFFFFF"></path>
+            </g>
+        </g>
+    </g>
+</svg>
+    </a>
+
+
+</div>
+
+    
+
+    <div class="copyright">
+    
+       © Copyright 
+       2024 
+       <span class="split">
+        <svg fill="#bbbbbb" width="15" height="15" version="1.1" id="heart-15" xmlns="http://www.w3.org/2000/svg" width="15px" height="15px" viewBox="0 0 15 15">
+  <path d="M13.91,6.75c-1.17,2.25-4.3,5.31-6.07,6.94c-0.1903,0.1718-0.4797,0.1718-0.67,0C5.39,12.06,2.26,9,1.09,6.75&#xA;&#x9;C-1.48,1.8,5-1.5,7.5,3.45C10-1.5,16.48,1.8,13.91,6.75z"/>
+</svg>
+       </span>
+       WB
+    
+    </div>
+
+    
+      <div class="powerby">
+        Powered by <a href='http://www.gohugo.io/'>Hugo</a> Theme By <a href='https://github.com/nodejh/hugo-theme-mini'>nodejh</a>
+      </div>
+    
+</footer>
+
+
+
+  </body>
+</html>

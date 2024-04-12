@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>CSS 知识总结 | Clown的博客</title>
+
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">    
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="文档流 盒模型 CSS 布局 CSS 定位 CSS 动画 层叠上下文 浏览器渲染原理 文档流 流动方向 inline inline元素从左至右,位置不够时,可能会将元素分为两块宽度由内部的">
+<meta name="generator" content="Hugo 0.57.2" />
+
+
+  <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+
+ 
+  
+
+
+
+
+
+
+
+  </head>
+
+  <body>
+    <nav class="navigation">
+	
+		<a href="/"> <span class="arrow">←</span>首页</a>
+	
+	<a href="/posts">归档</a>
+	<a href="/tags">标签</a>
+
+
+	
+
+
+
+
+</nav>
+
+
+    <main class="main">
+      
+
+<section id="single">
+    <h1 class="title">CSS 知识总结</h1>
+
+    <div class="tip">
+        <time datetime="2020-05-14 22:15:34 &#43;0800 CST">2020年05月14日</time>
+        <span class="split">
+          ·
+        </span>
+        <span>
+          wordCount
+        </span>
+        <span class="split">
+          ·
+        </span>
+        <span>
+          8分钟
+        </span>
+    </div>
+
+    
+    
+        
+  
+    <aside class="toc">
+      <details>
+          <summary>Table of Contents
+          </summary>
+          <div>
+              <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#文档流-text"><a href="#text">文档流</a></a></li>
+<li><a href="#盒模型-box"><a href="#box">盒模型</a></a></li>
+<li><a href="#css-布局-layout"><a href="#layout">CSS 布局</a></a></li>
+<li><a href="#css-定位-position"><a href="#position">CSS 定位</a></a></li>
+<li><a href="#css-动画-animation"><a href="#animation">CSS 动画</a></a></li>
+<li><a href="#层叠上下文-stacking"><a href="#stacking">层叠上下文</a></a></li>
+<li><a href="#浏览器渲染原理-render"><a href="#render">浏览器渲染原理</a></a></li>
+</ul></li>
+<li><a href="#span-id-text-文档流-span"><span id="text">文档流</span></a>
+<ul>
+<li><a href="#流动方向">流动方向</a></li>
+<li><a href="#overflow">overflow</a></li>
+<li><a href="#脱离文档流">脱离文档流</a></li>
+</ul></li>
+<li><a href="#span-id-box-盒模型-span"><span id="box">盒模型</span></a>
+<ul>
+<li><a href="#标准盒子模型与怪异盒子模型的区别">标准盒子模型与怪异盒子模型的区别</a>
+<ul>
+<li><a href="#标准盒子模型-content-box">标准盒子模型 (content-box):</a></li>
+<li><a href="#怪异盒子模型-border-box">怪异盒子模型(border-box):</a></li>
+</ul></li>
+<li><a href="#如何使用盒子模型">如何使用盒子模型</a></li>
+<li><a href="#使用案例">使用案例</a>
+<ul>
+<li><a href="#html">HTML</a></li>
+<li><a href="#css">CSS</a></li>
+<li><a href="#预览效果">预览效果</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#span-id-layout-css-布局-span"><span id="layout">CSS 布局</span></a>
+<ul>
+<li><a href="#float布局">float布局</a></li>
+<li><a href="#flex-布局">flex 布局</a>
+<ul>
+<li><a href="#container-的属性">container 的属性</a></li>
+<li><a href="#item-的属性">item 的属性</a></li>
+</ul></li>
+<li><a href="#grid-布局">grid 布局</a></li>
+</ul></li>
+<li><a href="#span-id-position-css-定位-span"><span id="position">CSS 定位</span></a>
+<ul>
+<li><a href="#position">position</a></li>
+</ul></li>
+<li><a href="#span-id-animation-css-动画-span"><span id="animation">CSS 动画</span></a>
+<ul>
+<li><a href="#transform">transform</a></li>
+<li><a href="#transition">transition</a></li>
+<li><a href="#animation">animation</a></li>
+</ul></li>
+<li><a href="#span-id-stacking-层叠上下文-span"><span id="stacking">层叠上下文</span></a></li>
+<li><a href="#span-id-render-浏览器渲染原理-span"><span id="render" >浏览器渲染原理</span></a>
+<ul>
+<li><a href="#步骤">步骤:</a></li>
+<li><a href="#如何更新样式">如何更新样式:</a></li>
+<li><a href="#有三种不同的渲染方式">有三种不同的渲染方式</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+          </div>
+      </details>
+    </aside>
+  
+
+
+    
+
+
+    <div class="content">
+      
+
+<h3 id="文档流-text"><a href="#text">文档流</a></h3>
+
+<h3 id="盒模型-box"><a href="#box">盒模型</a></h3>
+
+<h3 id="css-布局-layout"><a href="#layout">CSS 布局</a></h3>
+
+<h3 id="css-定位-position"><a href="#position">CSS 定位</a></h3>
+
+<h3 id="css-动画-animation"><a href="#animation">CSS 动画</a></h3>
+
+<h3 id="层叠上下文-stacking"><a href="#stacking">层叠上下文</a></h3>
+
+<h3 id="浏览器渲染原理-render"><a href="#render">浏览器渲染原理</a></h3>
+
+<h2 id="span-id-text-文档流-span"><span id="text">文档流</span></h2>
+
+<h3 id="流动方向">流动方向</h3>
+
+<ul>
+<li><p>inline</p>
+
+<p><code>inline</code>元素从左至右,位置不够时,可能会将元素分为两块<br/>宽度由内部的<code>inline</code>元素的和决定不能指定宽度<br/>高度由<code>line-height</code>间接决定,与<code>height</code>无关</p></li>
+
+<li><p>block</p>
+
+<p>宽度默认自动计算,可以用<code>width</code>指定<br/>高度由内部文档流元素决定,可以设置<code>height</code>决定</p></li>
+
+<li><p>inline-block</p>
+
+<p>从左至右,位置不够时,不会将元素分为两块<br/>结合两者的特点,可以用<code>width</code>指定宽度,也可以用<code>height</code>设置高度</p></li>
+</ul>
+
+<p>注意:</p>
+
+<ol>
+<li>现在不再区分<code>内联元素</code>和<code>块级元素</code>,而是有<code>display</code>决定.</li>
+<li>千万不要在 <code>inline元素</code>中加<code>block元素</code>.</li>
+</ol>
+
+<h3 id="overflow">overflow</h3>
+
+<p>当内容的宽度或者高度大于容器的宽度或高度时,会产生溢出现象.</p>
+
+<p>可用<code>overflow</code>属性设置:</p>
+
+<ul>
+<li>visible:默认值,内容不会被改变,显示在容器外部</li>
+<li>hidden:内容会被裁剪,适应容器的大小,没有滚动条</li>
+<li>scroll:内容会被裁剪,适应容器大小,显示滚动条(无论内容是否超出容器,都会显示滚动条)</li>
+<li>auto:内容会被裁剪,适应容器大小,显示滚动条(判断内容是否超出容器,超出容器就显示滚动条,否则不显示)</li>
+</ul>
+
+<h3 id="脱离文档流">脱离文档流</h3>
+
+<p>当元素使用<code>float</code>和<code>position:absolute | fixed</code>属性,都会使元素脱离文档流,脱离文档流后,父元素将不再计算其高度</p>
+
+<h2 id="span-id-box-盒模型-span"><span id="box">盒模型</span></h2>
+
+<p>CSS中有两种盒子模型,一种是W3C标准的盒子模型(content-box),另一种是IE标准的(怪异)盒子模型(border-box).</p>
+
+<h3 id="标准盒子模型与怪异盒子模型的区别">标准盒子模型与怪异盒子模型的区别</h3>
+
+<p>只有当标准盒子模型与怪异盒子模型同时设置了宽度(width),边框(border)和内边距(padding),才能够用肉眼看到明显的差别</p>
+
+<h4 id="标准盒子模型-content-box">标准盒子模型 (content-box):</h4>
+
+<p>标准盒子模型的 <code>width</code> 和 <code>height</code> 指的是内容 (content) 的宽度和高度,不包括内边距(padding),边框(border)和外边距(margin).</p>
+
+<p><img src="/images/box1.png" alt="标准盒子模型" /></p>
+
+<p>标准盒子模型的的大小 = width(content) + padding + border + margin</p>
+
+<h4 id="怪异盒子模型-border-box">怪异盒子模型(border-box):</h4>
+
+<p>怪异盒子模型的 <code>width</code> 和 <code>height</code> 指的是内容 (content),内边距(padding)和边框(border) ,不包括外边距边距</p>
+
+<p><img src="/images/box2.png" alt="怪异盒子模型" /></p>
+
+<p>怪异盒子模型的的大小 = width(content + padding + border) + margin</p>
+
+<h3 id="如何使用盒子模型">如何使用盒子模型</h3>
+
+<p>我们可以通过 <code>box-sizing</code> 来设置使用什么盒子模型.</p>
+
+<ul>
+<li><p>content-box: 默认值,即是标准盒子模型.</p></li>
+
+<li><p>border-box: 怪异盒子模型,程序员更多的使用这个,可以更好的设置一个元素的宽高.</p></li>
+</ul>
+
+<h3 id="使用案例">使用案例</h3>
+
+<h4 id="html">HTML</h4>
+
+<pre><code>    &lt;div class=&quot;content-box&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;border-box&quot;&gt;&lt;/div&gt;
+</code></pre>
+
+<h4 id="css">CSS</h4>
+
+<pre><code>div {
+    width: 200px;
+    height: 100px;
+    border: 5px solid red;
+    padding: 30px;
+    margin: 30px;
+}
+
+.content-box {
+    box-sizing: content-box;
+}
+
+.border-box {
+    box-sizing: border-box;
+}
+</code></pre>
+
+<h4 id="预览效果">预览效果</h4>
+
+<p><img src="/images/result.png" alt="结果" /></p>
+
+<h2 id="span-id-layout-css-布局-span"><span id="layout">CSS 布局</span></h2>
+
+<h3 id="float布局">float布局</h3>
+
+<p>现在基本不使用,除非要兼容老版本的IE浏览器,手机上基本不用,因为手机上没有IE.</p>
+
+<p>HTML</p>
+
+<pre><code>    &lt;div class=&quot;clearfix&quot;&gt;
+        &lt;div class=&quot;div1&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;div2&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+</code></pre>
+
+<p>CSS</p>
+
+<pre><code>        .clearfix {
+            border: 2px solid green;
+        }
+
+        .clearfix::after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        .div1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            float: left;
+        }
+
+        .div2 {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            float: left;
+        }
+</code></pre>
+
+<p>注意:在父元素中加入<code>clearfix::after</code>,是为了清除由于子元素进行浮动,导致父元素的高度塌陷的问题</p>
+
+<p><img src="/images/float.png" alt="float布局" /></p>
+
+<h3 id="flex-布局">flex 布局</h3>
+
+<p><code>flex</code>是弹性盒子布局,现在的浏览器大部分都支持</p>
+
+<h4 id="container-的属性">container 的属性</h4>
+
+<ul>
+<li><p>display 声明</p>
+
+<pre><code>.container{
+  display: flex | inline-flex;
+}
+</code></pre></li>
+
+<li><p>flex-direction 主轴流动方向</p>
+
+<ul>
+<li>row:默认值,从左至右</li>
+<li>column:从上至下</li>
+<li>row-reserve:从右至左</li>
+
+<li><p>column-reserve:从下至上</p>
+
+<pre><code>.container {
+flex-direction: row | column | row-reverse | column-reverse;
+}
+</code></pre></li>
+</ul></li>
+
+<li><p>flex-wrap 换行方式</p>
+
+<ul>
+<li>nowrap:默认值,不换行</li>
+<li>wrap:换行(常用)</li>
+
+<li><p>wrap-reserve:头尾交换的换行(基本不用)</p>
+
+<pre><code>.container {
+flex-wrap: nowrap | wrap | wrap-reverse;
+}
+</code></pre></li>
+</ul></li>
+
+<li><p>justify-content 主轴对齐方式</p>
+
+<ul>
+<li>flex-start:默认值,起点对齐</li>
+<li>flex-end:终点对齐</li>
+<li>center:居中对其</li>
+<li>space-between:两端对齐,并使各个<code>item</code>之间间隔相等</li>
+
+<li><p>space-around:在行内平均分配,各个<code>item</code>之间的间隔的一半等于第一个和最后一个<code>item</code>到行首和行尾的间隔</p>
+
+<pre><code>.container {
+justify-content: flex-start | flex-end | center | space-between | space-around;
+}
+</code></pre></li>
+</ul></li>
+
+<li><p>align-items 次轴对齐方式</p>
+
+<ul>
+<li>flex-start:起点对齐</li>
+<li>flex-end:终点对齐</li>
+<li>center:居中对齐</li>
+
+<li><p>stretch:默认值,如果项目未设置高度或设为auto,则占满容器高度</p>
+
+<pre><code>.container {
+align-items: flex-end | flex-end | center | stretch;
+}
+</code></pre></li>
+</ul></li>
+
+<li><p>align-content 多行对齐方式</p>
+
+<ul>
+<li>flex-start:起点对齐</li>
+<li>flex-end:终点对齐</li>
+<li>center:居中对齐</li>
+<li>stretch:默认值,占满整个容器</li>
+<li>space-between:两端对齐,并使各个<code>item</code>之间间隔相等</li>
+
+<li><p>space-around:在行内平均分配,各个<code>item</code>之间的间隔的一半等于第一个和最后一个<code>item</code>到行首和行尾的间隔</p>
+
+<pre><code>.container {
+align-content: flex-start | flex-end | center | stretch | space-between | space-around;
+}
+</code></pre></li>
+</ul></li>
+</ul>
+
+<h4 id="item-的属性">item 的属性</h4>
+
+<ul>
+<li>order 排列顺序
+<br /></li>
+</ul>
+
+<p>默认为0,按照值的大小排列<code>item</code>的顺序</p>
+
+<pre><code>  .items {
+      order: 1;
+  }
+</code></pre>
+
+<ul>
+<li>flex-grow 增长系数
+<br /></li>
+</ul>
+
+<p>默认值为0,负值没有效,值数越大,行内占的比例越大.</p>
+
+<pre><code>  .items {
+      flex-grow: 1;
+  }
+</code></pre>
+
+<ul>
+<li>flex-shrink 收缩系数</li>
+</ul>
+
+<p>默认值为1,负值没有效,值数越大,在宽度大于容器宽度时,在行内占据的比例越小,为0时,不收缩</p>
+
+<pre><code>  .items {
+      flex-shrink: 2;
+  }
+</code></pre>
+
+<ul>
+<li><p>align-self 某个item的布局</p>
+
+<ul>
+<li>flex-start:起点对齐</li>
+<li>flex-end:终点对齐</li>
+
+<li><p>center:居中对齐</p>
+
+<pre><code>.items {
+align-self: flex-start | flex-end | center;
+}
+
+</code></pre></li>
+</ul></li>
+</ul>
+
+<h3 id="grid-布局">grid 布局</h3>
+
+<p>grid是一种二维布局,最新的浏览器都支持.</p>
+
+<ul>
+<li><p>grid 的声明</p>
+
+<pre><code>.container{
+  display: grid | inline-grid;
+}
+</code></pre></li>
+
+<li><p>grid 的使用</p>
+
+<pre><code>.container{
+  grid-template-rows: 200px 400px 200px;
+  grid-template-columns: 40px 50px auto 50px 40px;
+}
+</code></pre></li>
+</ul>
+
+<p>上面的代码创建了一个三行五列的<code>grid</code>表格.</p>
+
+<ul>
+<li><p>grid 的选取</p>
+
+<pre><code>.item {
+  grid-row-start: 1;
+  grid-row-end: 3;
+  background-color: red;
+    }
+}
+</code></pre></li>
+</ul>
+
+<p>通多代码,选取了<code>grid</code>表格中的从上至下第一条线到第三条线中的格子,并把它们的背景色改为红色</p>
+
+<ul>
+<li><p>份</p>
+
+<p>类似于<code>flex</code>中的<code>flex-grow</code>.可以指定占据的比例</p>
+
+<pre><code>.container {
+          grid-template-columns: 1fr 1fr 40px 10% 10em;
+      }
+</code></pre></li>
+
+<li><p>grid-gap 间隙</p>
+
+<p>指定格与格之间的间隙</p>
+
+<pre><code>.container {
+    grid-column-gap:12px;
+}
+</code></pre></li>
+
+<li><p>grid-template-area 分区</p>
+
+<pre><code>.container {
+  grid-template-areas:
+      &quot;header header header&quot;
+      &quot;aside main ad&quot;
+      &quot;footer footer footer&quot;
+  }
+}
+.container&gt;header{
+  grid-area:header
+}
+</code></pre></li>
+</ul>
+
+<h2 id="span-id-position-css-定位-span"><span id="position">CSS 定位</span></h2>
+
+<h3 id="position">position</h3>
+
+<ul>
+<li><p>static</p>
+
+<p>默认值,在文档流中</p></li>
+
+<li><p>relative</p>
+
+<p>相对定位,比文档流要高一层,但不脱离文档流.</p>
+
+<p>作用:</p>
+
+<ol>
+<li>用于做位移(很少用)</li>
+<li>用来做<code>absolute</code>的父元素</li>
+<li>配合<code>z-index</code></li>
+</ol></li>
+
+<li><p>absolute</p>
+
+<p>绝对定位,脱离原来的位置,另起一层,定位基准是祖先中第一个不是<code>static</code>的元素</p>
+
+<p>作用:</p>
+
+<ol>
+<li>关闭对话框按钮</li>
+<li>鼠标提示文字</li>
+<li>配合<code>z-index</code></li>
+</ol>
+
+<p>注意:</p>
+
+<ol>
+<li>某些浏览器不写上<code>top</code>,<code>left</code>会导致位置错乱</li>
+<li>善用<code>left:50%</code>,加<code>-margin:width/2</code>或者<code>transform:translateX(-50%)</code></li>
+<li>一般用了<code>absolute</code>都要在父元素中补一个<code>relative</code></li>
+</ol></li>
+
+<li><p>fixed</p>
+
+<p>固定定位,定位的基准是<code>viewport(视口)</code>,但当父元素中使用了<code>transform:scale</code>属性,将会出错.</p>
+
+<p>作用:</p>
+
+<ol>
+<li>边栏广告</li>
+<li>返回顶部按钮</li>
+<li>配合<code>z-index</code></li>
+</ol>
+
+<p>注意: 手机上尽量不要使用,很多bug</p></li>
+
+<li><p>sticky</p>
+
+<p>粘滞定位</p>
+
+<p>作用: 滑动到顶部时,粘滞在顶部的导航栏</p>
+
+<p>注意: 兼容性很差</p></li>
+</ul>
+
+<h2 id="span-id-animation-css-动画-span"><span id="animation">CSS 动画</span></h2>
+
+<h3 id="transform">transform</h3>
+
+<ul>
+<li><p>translate(translateX,translateY)  沿X轴和Y轴上位移</p>
+
+<ul>
+<li>translateX:沿X轴上位移</li>
+<li>translateY:沿Y轴上位移</li>
+<li>translateZ:沿Z轴上位移</li>
+<li>translate3d(translateX,translateY,translateZ):沿X轴,Y轴和Z轴上位移</li>
+</ul></li>
+
+<li><p>scale(scaleX,scaleY)  沿X轴和Y轴上缩放</p>
+
+<ul>
+<li>scaleX:沿X轴上缩放</li>
+<li>scaleY:沿Y轴上缩放</li>
+<li>scaleZ:沿Z轴上缩放</li>
+<li>scale3d(scaleX,scaleY,scaleZ):沿X轴,Y轴和Z轴上缩放</li>
+</ul></li>
+
+<li><p>rotate(rotateX,rotateY)  沿X轴和Y轴上旋转</p>
+
+<ul>
+<li>rotateX:沿X轴上旋转</li>
+<li>rotateY:沿Y轴上旋转</li>
+<li>rotateZ:沿Z轴上旋转</li>
+<li>rotate3d(rotateX,rotateY,rotateZ):沿X轴,Y轴和Z轴上旋转</li>
+</ul></li>
+
+<li><p>skew(skewX,skewY)  沿X轴和Y轴上倾斜</p>
+
+<ul>
+<li>skewX:沿X轴上倾斜</li>
+<li>skewY:沿Y轴上倾斜</li>
+<li>skewZ:沿Z轴上倾斜</li>
+<li>skew3d(skewX,skewY,skewZ):沿X轴,Y轴和Z轴上倾斜</li>
+</ul></li>
+</ul>
+
+<h3 id="transition">transition</h3>
+
+<p>作用: 补充中间帧</p>
+
+<p>语法:</p>
+
+<pre><code>transition:property duration timing-function delay;
+</code></pre>
+
+<p>过度方式:</p>
+
+<pre><code>timing-function:ease | ease-in | ease-out | ease-in-out | liner | cubic-bezier(0.1, 0.7, 1.0, 0.1);
+</code></pre>
+
+<p>注意:</p>
+
+<ul>
+<li>可以使用 <code>all</code> 代替所有属性</li>
+<li><code>display:none =&gt; block</code> 没法过渡,一般改为<code>visibility:hidden =&gt; visible</code></li>
+</ul>
+
+<h3 id="animation">animation</h3>
+
+<p>关键帧动画,可以处理多次动画</p>
+
+<p>语法:</p>
+
+<pre><code>animation: duration | timing-function | delay | iteration-count | direction | fill-mode | play-state | name
+</code></pre>
+
+<p>属性:</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">属性</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">duration</td>
+<td align="center">指定动画周期的时长</td>
+</tr>
+
+<tr>
+<td align="center">timing-function</td>
+<td align="center">动画过渡方式</td>
+</tr>
+
+<tr>
+<td align="center">delay</td>
+<td align="center">延迟</td>
+</tr>
+
+<tr>
+<td align="center">iteration-count</td>
+<td align="center">循环次数</td>
+</tr>
+
+<tr>
+<td align="center">direction</td>
+<td align="center">是否反向播放</td>
+</tr>
+
+<tr>
+<td align="center">fill-mode</td>
+<td align="center">动画执行前后为目标应用样式</td>
+</tr>
+
+<tr>
+<td align="center">play-state</td>
+<td align="center">允许暂停和播放</td>
+</tr>
+
+<tr>
+<td align="center">name</td>
+<td align="center">动画名称</td>
+</tr>
+</tbody>
+</table>
+
+<p>使用示例:</p>
+
+<p>HTML</p>
+
+<pre><code> &lt;div class=&quot;box&quot;&gt;
+        &lt;div class=&quot;left&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;right&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;bottom&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+</code></pre>
+
+<p>CSS</p>
+
+<pre><code>* {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .box {
+            margin: 200px;
+            position: relative;
+            display: inline-block;
+            animation: .5s infinite heart;
+        }
+
+        @keyframes heart {
+            0% {
+                transform: none;
+            }
+
+            50% {
+                transform: scale(1.5);
+            }
+
+            100% {
+                transform: none;
+            }
+        }
+
+        .left {
+            width: 100px;
+            height: 100px;
+            background: red;
+            transform: rotate(45deg) translateX(80px);
+            position: absolute;
+            bottom: 100%;
+            right: 100%;
+            border-radius: 50%;
+            border-radius: 50% 0 0 50%;
+        }
+
+        .right {
+            width: 100px;
+            height: 100px;
+            background: red;
+            transform: rotate(45deg) translateY(80px);
+            position: absolute;
+            bottom: 100%;
+            left: 100%;
+            border-radius: 50% 50% 0 0;
+        }
+
+        .bottom {
+            width: 100px;
+            height: 100px;
+            background: red;
+            transform: rotate(45deg);
+        }
+</code></pre>
+
+<p>效果:
+<img src="/images/small-heart.png" alt="动画截图" />
+<img src="/images/big-heart.png" alt="动画截图" /></p>
+
+<h2 id="span-id-stacking-层叠上下文-span"><span id="stacking">层叠上下文</span></h2>
+
+<p>定位元素(z-index=1) &gt; 文字(内联子元素) &gt; 浮动元素 &gt; 块级元素 &gt; 边框(border) &gt; 背景(background) &gt; 定位元素(z-index=-1)  &gt; html</p>
+
+<p>注意:每一个层叠上下文就是一个小世界,只有同一个小世界才能够进行比较,小世界里的z-index与小世界外的z-index无关.</p>
+
+<p>哪些属性可以创建层叠上下文:</p>
+
+<ul>
+<li>z-index部位auto,并有 relative/absolute/fixed</li>
+<li>opacity</li>
+<li>transform</li>
+<li>html 元素</li>
+</ul>
+
+<h2 id="span-id-render-浏览器渲染原理-span"><span id="render" >浏览器渲染原理</span></h2>
+
+<h3 id="步骤">步骤:</h3>
+
+<ol>
+<li>根据<code>HTML</code>,构建一个<code>HTML</code>树(DOM)</li>
+<li>根据<code>CSS</code>,构建一个<code>CSS</code>树(CSSOM)</li>
+<li>将两根树合并,成为一棵渲染树(render tree)</li>
+<li>Layout 布局(文档流,盒模型,计算大小和位置)</li>
+<li>Paint 绘制(把边框颜色,文字颜色,阴影等绘制)</li>
+<li>Compose 合成(根据层叠关系展示画面)</li>
+</ol>
+
+<h3 id="如何更新样式">如何更新样式:</h3>
+
+<p>一般用<code>JS</code>来更新样式</p>
+
+<h3 id="有三种不同的渲染方式">有三种不同的渲染方式</h3>
+
+<ol>
+<li><p>JS/CSS &gt;&gt; 样式 &gt;&gt; 布局 &gt;&gt; 绘制 &gt;&gt; 合成</p>
+
+<p>例如:使用<code>div.remove()</code>删除元素</p></li>
+
+<li><p>JS/CSS &gt;&gt; 样式 &gt;&gt; 绘制 &gt;&gt; 合成</p>
+
+<p>例如:使用<code>background</code>改变背景颜色</p></li>
+
+<li><p>JS/CSS &gt;&gt; 样式 &gt;&gt; 合成</p>
+
+<p>例如:使用<code>transform</code>属性改变样式</p></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+  <div id="comment">
+    
+    
+  </div>
+
+
+</section>
+
+
+    </main>
+    
+    <footer id="footer">
+    
+        <div id="social">
+
+
+    <a class="symbol" href="https://github.com/LWeibing" rel="me" target="_blank">
+        
+        <svg fill="#bbbbbb" width="28" height="28"  viewBox="0 0 72 72" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    
+    <title>Github</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Social-Icons---Rounded-Black" transform="translate(-264.000000, -939.000000)">
+            <g id="Github" transform="translate(264.000000, 939.000000)">
+                <path d="M8,72 L64,72 C68.418278,72 72,68.418278 72,64 L72,8 C72,3.581722 68.418278,-8.11624501e-16 64,0 L8,0 C3.581722,8.11624501e-16 -5.41083001e-16,3.581722 0,8 L0,64 C5.41083001e-16,68.418278 3.581722,72 8,72 Z" id="Rounded" fill="#bbbbbb"></path>
+                <path d="M35.9985,13 C22.746,13 12,23.7870921 12,37.096644 C12,47.7406712 18.876,56.7718301 28.4145,59.9584121 C29.6145,60.1797862 30.0525,59.4358488 30.0525,58.7973276 C30.0525,58.2250681 30.0315,56.7100863 30.0195,54.6996482 C23.343,56.1558981 21.9345,51.4693938 21.9345,51.4693938 C20.844,48.6864054 19.2705,47.9454799 19.2705,47.9454799 C17.091,46.4500754 19.4355,46.4801943 19.4355,46.4801943 C21.843,46.6503662 23.1105,48.9634994 23.1105,48.9634994 C25.2525,52.6455377 28.728,51.5823398 30.096,50.9649018 C30.3135,49.4077535 30.9345,48.3460615 31.62,47.7436831 C26.2905,47.1352808 20.688,45.0691228 20.688,35.8361671 C20.688,33.2052792 21.6225,31.0547881 23.1585,29.3696344 C22.911,28.7597262 22.0875,26.3110578 23.3925,22.9934585 C23.3925,22.9934585 25.4085,22.3459017 29.9925,25.4632101 C31.908,24.9285993 33.96,24.6620468 36.0015,24.6515052 C38.04,24.6620468 40.0935,24.9285993 42.0105,25.4632101 C46.5915,22.3459017 48.603,22.9934585 48.603,22.9934585 C49.9125,26.3110578 49.089,28.7597262 48.8415,29.3696344 C50.3805,31.0547881 51.309,33.2052792 51.309,35.8361671 C51.309,45.0917119 45.6975,47.1292571 40.3515,47.7256117 C41.2125,48.4695491 41.9805,49.9393525 41.9805,52.1877301 C41.9805,55.4089489 41.9505,58.0067059 41.9505,58.7973276 C41.9505,59.4418726 42.3825,60.1918338 43.6005,59.9554002 C53.13,56.7627944 60,47.7376593 60,37.096644 C60,23.7870921 49.254,13 35.9985,13" fill="#FFFFFF"></path>
+            </g>
+        </g>
+    </g>
+</svg>
+    </a>
+
+
+</div>
+
+    
+
+    <div class="copyright">
+    
+       © Copyright 
+       2024 
+       <span class="split">
+        <svg fill="#bbbbbb" width="15" height="15" version="1.1" id="heart-15" xmlns="http://www.w3.org/2000/svg" width="15px" height="15px" viewBox="0 0 15 15">
+  <path d="M13.91,6.75c-1.17,2.25-4.3,5.31-6.07,6.94c-0.1903,0.1718-0.4797,0.1718-0.67,0C5.39,12.06,2.26,9,1.09,6.75&#xA;&#x9;C-1.48,1.8,5-1.5,7.5,3.45C10-1.5,16.48,1.8,13.91,6.75z"/>
+</svg>
+       </span>
+       WB
+    
+    </div>
+
+    
+      <div class="powerby">
+        Powered by <a href='http://www.gohugo.io/'>Hugo</a> Theme By <a href='https://github.com/nodejh/hugo-theme-mini'>nodejh</a>
+      </div>
+    
+</footer>
+
+
+
+  </body>
+</html>

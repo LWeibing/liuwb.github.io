@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>JS 函数的执行时机 | Clown的博客</title>
+
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">    
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="执行时机 时机不同,得到的结果也是不同的,看下面的例子: // 例 1 let a = 1 function fn(){ console.log(a) } a = 2 fn() // 2 // 例 2 let a = 1 function fn(){ console.log(a) } fn() // 1 a = 2 例 1和例 2,代码其">
+<meta name="generator" content="Hugo 0.57.2" />
+
+
+  <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+
+ 
+  
+
+
+
+
+
+
+
+  </head>
+
+  <body>
+    <nav class="navigation">
+	
+		<a href="/"> <span class="arrow">←</span>首页</a>
+	
+	<a href="/posts">归档</a>
+	<a href="/tags">标签</a>
+
+
+	
+
+
+
+
+</nav>
+
+
+    <main class="main">
+      
+
+<section id="single">
+    <h1 class="title">JS 函数的执行时机</h1>
+
+    <div class="tip">
+        <time datetime="2020-05-20 20:43:32 &#43;0800 CST">2020年05月20日</time>
+        <span class="split">
+          ·
+        </span>
+        <span>
+          wordCount
+        </span>
+        <span class="split">
+          ·
+        </span>
+        <span>
+          2分钟
+        </span>
+    </div>
+
+    
+    
+        
+  
+    <aside class="toc">
+      <details>
+          <summary>Table of Contents
+          </summary>
+          <div>
+              <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#执行时机">执行时机</a>
+<ul>
+<li><a href="#那么-我们如何解决呢">那么,我们如何解决呢?</a>
+<ul>
+<li><a href="#方法一">方法一:</a></li>
+<li><a href="#方法二">方法二:</a></li>
+<li><a href="#方法三">方法三:</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+          </div>
+      </details>
+    </aside>
+  
+
+
+    
+
+
+    <div class="content">
+      
+
+<h2 id="执行时机">执行时机</h2>
+
+<p>时机不同,得到的结果也是不同的,看下面的例子:</p>
+
+<pre><code class="language-javascript">// 例 1 
+let a = 1
+function fn(){
+    console.log(a)
+}
+a = 2
+fn() // 2
+</code></pre>
+
+<pre><code class="language-javascript">// 例 2
+let a = 1
+function fn(){
+    console.log(a)
+}
+fn() // 1
+a = 2
+</code></pre>
+
+<p>例 1和例 2,代码其实都差不多,不同的只是 <code>fn</code> 的调用时机不同,例 1在代码<code>a=2</code>之后调用<code>fn</code>,a这个时候已经被重新赋值了,所以得出的结果为2;例 2调用<code>fn</code>,结果直接输出为1,后面<code>a=2</code>,对其完全没有影响</p>
+
+<p>现在我们知道了时机对函数的影响,我们继续来看下面这个例子:</p>
+
+<pre><code class="language-javascript">// 例 3
+let i = 0
+for(i = 0; i&lt;6; i++){
+  setTimeout(()=&gt;{
+    console.log(i)
+  },0)
+}
+</code></pre>
+
+<p>你以为输出的结果会是 <code>0,1,2,3,4,5</code> ?仿佛并不是这样,结果是 <code>6,6,6,6,6,6</code>,这是为什么呢?</p>
+
+<p>这里我们就要说一下 <code>setTimeout</code> ,这个API是指定一个定时器,该定时器在到时候执行里面的函数或代码</p>
+
+<pre><code class="language-javascript">console.log('执行setTimeout')
+    setTimeout(() =&gt; {
+        console.log('现在是3秒后')
+}, 3000)
+</code></pre>
+
+<p>运行上面这段代码,可以看到,当第一句输出后,过了3秒钟,输出了第二句,也就是说 <code>setTimeout</code> 可以延迟执行</p>
+
+<p>回到例 3, <code>setTimeout</code> 的延迟时间是0,在 <code>MDN</code> 中有这样一句话<code>&quot;如果省略该参数，delay取默认值0，意味着“马上”执行，或者尽快执行。不管是哪种情况，实际的延迟时间可能会比期待的(delay毫秒数) 值长&quot;</code></p>
+
+<p>也就是说,不管怎么样,<code>setTimeout</code> 都会比浏览器执行普通循环语句用的时间长,异步队列中的6个<code>setTimeout</code>执行的时候, <code>i</code> 的值已经经过了六次的覆盖,所以打印出来的值就是 <code>6个6</code>了</p>
+
+<h3 id="那么-我们如何解决呢">那么,我们如何解决呢?</h3>
+
+<h4 id="方法一">方法一:</h4>
+
+<pre><code class="language-javascript">// 例 4
+for(let i = 0; i&lt;6; i++){
+  setTimeout(()=&gt;{
+    console.log(i)
+  },0)
+} // 0,1,2,3,4,5
+</code></pre>
+
+<p>在ES6中,为了方便使用,以及新手的学习,创造一个新的关键字 <code>let</code>,其可以定义一个块级作用域的变量.</p>
+
+<p>在例 4中 <code>for</code> 循环中使用 <code>let</code> ,作用域只在循环中,而且每次都会创建一个新的 <code>i</code>,于是在循环完成后一共有六个 <code>i</code> ,异步队列中的6个<code>setTimeout</code>执行的时候,将访问到的 <code>i</code> 依次输出,结果就是我们想要的结果了.</p>
+
+<h4 id="方法二">方法二:</h4>
+
+<pre><code class="language-javascript">let i = 0
+for (i = 0; i &lt; 6; i++) {
+    times(i)
+}
+function times(i) {
+    setTimeout(() =&gt; {
+        console.log(i)
+    }, 0)
+}
+</code></pre>
+
+<p>将 <code>setTimeout</code> 从<code>for</code>循环中拿出来放入一个函数中,每次<code>for</code>循环调用这个函数并将 <code>i</code> 传入函数,就算 <code>setTimeout</code> 会比较慢,但是和 <code>for</code> 循环无关,调用了6个函数也接到了 <code>i</code> 的值,当 <code>setTimeout</code> 执行的时候,把 <code>i</code> 值输出就行了</p>
+
+<h4 id="方法三">方法三:</h4>
+
+<pre><code class="language-javascript">let i
+for (i = 0; i &lt; 6; i++) {
+  const index = i
+  setTimeout(() =&gt; {
+    console.log(index)
+  })
+}
+</code></pre>
+
+<p>在ES6中,创造一个新的关键字 <code>const</code> ,该关键字可以定义一个常量,常量是不可修改的</p>
+
+<p>因此,我们可以用常量去记录每一次循环的 <code>i</code> ,在输出这个常量,则可以得到我们想要的结果</p>
+
+    </div>
+
+    
+    
+    
+  <div id="comment">
+    
+    
+  </div>
+
+
+</section>
+
+
+    </main>
+    
+    <footer id="footer">
+    
+        <div id="social">
+
+
+    <a class="symbol" href="https://github.com/LWeibing" rel="me" target="_blank">
+        
+        <svg fill="#bbbbbb" width="28" height="28"  viewBox="0 0 72 72" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    
+    <title>Github</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Social-Icons---Rounded-Black" transform="translate(-264.000000, -939.000000)">
+            <g id="Github" transform="translate(264.000000, 939.000000)">
+                <path d="M8,72 L64,72 C68.418278,72 72,68.418278 72,64 L72,8 C72,3.581722 68.418278,-8.11624501e-16 64,0 L8,0 C3.581722,8.11624501e-16 -5.41083001e-16,3.581722 0,8 L0,64 C5.41083001e-16,68.418278 3.581722,72 8,72 Z" id="Rounded" fill="#bbbbbb"></path>
+                <path d="M35.9985,13 C22.746,13 12,23.7870921 12,37.096644 C12,47.7406712 18.876,56.7718301 28.4145,59.9584121 C29.6145,60.1797862 30.0525,59.4358488 30.0525,58.7973276 C30.0525,58.2250681 30.0315,56.7100863 30.0195,54.6996482 C23.343,56.1558981 21.9345,51.4693938 21.9345,51.4693938 C20.844,48.6864054 19.2705,47.9454799 19.2705,47.9454799 C17.091,46.4500754 19.4355,46.4801943 19.4355,46.4801943 C21.843,46.6503662 23.1105,48.9634994 23.1105,48.9634994 C25.2525,52.6455377 28.728,51.5823398 30.096,50.9649018 C30.3135,49.4077535 30.9345,48.3460615 31.62,47.7436831 C26.2905,47.1352808 20.688,45.0691228 20.688,35.8361671 C20.688,33.2052792 21.6225,31.0547881 23.1585,29.3696344 C22.911,28.7597262 22.0875,26.3110578 23.3925,22.9934585 C23.3925,22.9934585 25.4085,22.3459017 29.9925,25.4632101 C31.908,24.9285993 33.96,24.6620468 36.0015,24.6515052 C38.04,24.6620468 40.0935,24.9285993 42.0105,25.4632101 C46.5915,22.3459017 48.603,22.9934585 48.603,22.9934585 C49.9125,26.3110578 49.089,28.7597262 48.8415,29.3696344 C50.3805,31.0547881 51.309,33.2052792 51.309,35.8361671 C51.309,45.0917119 45.6975,47.1292571 40.3515,47.7256117 C41.2125,48.4695491 41.9805,49.9393525 41.9805,52.1877301 C41.9805,55.4089489 41.9505,58.0067059 41.9505,58.7973276 C41.9505,59.4418726 42.3825,60.1918338 43.6005,59.9554002 C53.13,56.7627944 60,47.7376593 60,37.096644 C60,23.7870921 49.254,13 35.9985,13" fill="#FFFFFF"></path>
+            </g>
+        </g>
+    </g>
+</svg>
+    </a>
+
+
+</div>
+
+    
+
+    <div class="copyright">
+    
+       © Copyright 
+       2024 
+       <span class="split">
+        <svg fill="#bbbbbb" width="15" height="15" version="1.1" id="heart-15" xmlns="http://www.w3.org/2000/svg" width="15px" height="15px" viewBox="0 0 15 15">
+  <path d="M13.91,6.75c-1.17,2.25-4.3,5.31-6.07,6.94c-0.1903,0.1718-0.4797,0.1718-0.67,0C5.39,12.06,2.26,9,1.09,6.75&#xA;&#x9;C-1.48,1.8,5-1.5,7.5,3.45C10-1.5,16.48,1.8,13.91,6.75z"/>
+</svg>
+       </span>
+       WB
+    
+    </div>
+
+    
+      <div class="powerby">
+        Powered by <a href='http://www.gohugo.io/'>Hugo</a> Theme By <a href='https://github.com/nodejh/hugo-theme-mini'>nodejh</a>
+      </div>
+    
+</footer>
+
+
+
+  </body>
+</html>
